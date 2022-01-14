@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章上传</title>
+    <script src="/js/backend_url.js"></script>
+    <script src="/js/jquery-1.12.4.min.js"></script>
+    <link rel="stylesheet" href="/layui-v2.5.7/css/layui.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <script src="/layui-v2.5.7/layui.js"></script>
+    <script src="/ckeditor/ckeditor.js"></script>
+    <link rel="stylesheet" href="/css/essay/upload.css">
+    <script src="/js/essay/upload.js"></script>
+</head>
+
+<body>
+    <!-- 页头 start -->
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header" id="myhead">
+        </div>
+    </div>
+    <script src="/js/user/user_status.js"></script>
+    <script src="/js/header.js"></script>
+    <!-- 页头 end -->
+
+    <div class="layui-container">
+        <div class="layui-row">
+            <div class="layui-col-md10 layui-col-md-offset1 upload-content">
+                <h3>上传文章</h3>
+                <!-- 表单 start -->
+                <form>
+                    <!-- 标题 start -->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">输入框</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="title" required lay-verify="required" placeholder="请输入标题"
+                                autocomplete="off" class="layui-input title-input" id="essay-title">
+                        </div>
+                    </div>
+                    <!-- 标题 end -->
+                    <hr>
+                    <!-- 正文 ckeditor start -->
+                    <div class="layui-form-item clearfix">
+                        <label for="rich-editor" class="layui-form-label">正文</label>
+                        <textarea rows="20" class="form-control" placeholder="请编辑正文" name="rich_editor" id="rich_editor"></textarea>
+                    </div>
+                    <!-- 正文 ckeditor end -->
+                    <hr>
+                    <!-- 按钮 start -->
+                    <div class="layui-form-item">
+                        <div class="layui-input-block btn-box">
+                            <button type="button" class="layui-btn" id="essay-submit">立即提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                    <!-- 按钮 end -->
+
+                </form>
+                <script>
+                    // 启用富文本编辑器
+                    var liasionContent = CKEDITOR.replace('rich_editor', {
+                        filebrowserUploadUrl: app_root + '/essay/richtext_upload',
+                        height: 400,
+                        extraPlugins: ['codesnippet', 'uploadimage', 'prism', 'widget', 'lineutils',],
+                    });
+                    // 表单布局
+                    layui.use('form', function () {
+                        var form = layui.form;
+                        return false;
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+    <script>
+        $.ajax({
+        url: app_root + "/user/user_status",
+        type: "get",
+        dataType: "json",
+        xhrFields: {
+            withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
+        },
+        crossDomain: true,
+        contentType: "application/json",
+    }).done(function (msg) {
+        console.log(msg);
+        if(msg.is_login=='false'){
+            location.href="/user/login.html";
+        }      
+    }).fail(function (e) {
+        console.log(e);
+    })
+    </script>
+
+
+</body>
+
+</html>

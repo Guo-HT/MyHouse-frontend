@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>页头</title>
+    <script src="/js/backend_url.js"></script>
+    <script src="/js/jquery-1.12.4.min.js"></script>
+    <link rel="stylesheet" href="/layui-v2.5.7/css/layui.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <script src="/layui-v2.5.7/layui.js"></script>
+    <script src="/js/user/user_status.js"></script>
+    <script src="/js/header-html.js" type="text/html" id="head_html"></script>
+</head>
+
+<body>
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header" id="myhead">
+            <ul class="layui-nav nav-left" lay-filter="">
+                <li class="layui-nav-item layui-this"><a href="">主页</a></li>
+                <li class="layui-nav-item"><a href="">社区</a></li>
+                <li class="layui-nav-item"><a href="">商城</a></li>
+                <li class="layui-nav-item"><a href="javascript:;">我的设备</a>
+                </li>
+              </ul>
+              <ul class="layui-nav nav-right" id="nav-right">
+                <li class="layui-nav-item">
+                    <a href="">订单<span class="layui-badge">0</span></a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="">历史记录<span class="layui-badge-dot"></span></a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="">发表文章<span class="layui-badge">0</span></a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:void(0);" id="user-self"><img src="./img/default-head.png" class="layui-nav-img">我</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/user/login.html">登录</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/user/register.html">注册</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function () {
+        var element = layui.element;
+    });
+    
+</script>
+
+</html>

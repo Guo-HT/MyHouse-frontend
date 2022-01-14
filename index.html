@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <script src="/js/backend_url.js"></script>
+    <script src="/js/jquery-1.12.4.min.js"></script>
+    <link rel="stylesheet" href="/layui-v2.5.7/css/layui.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <script src="/layui-v2.5.7/layui.js"></script>
+
+</head>
+
+<body>
+    <!-- 页头 start -->
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header" id="myhead">
+        </div>
+    </div>
+    <script src="/js/user/user_status.js"></script>
+    <script src="/js/header.js"></script>
+    <!-- 页头 end -->
+
+    <div class="layui-container">
+        <div class="layui-row">
+            <div class="layui-col-md12  main-content">
+                <!-- 轮播图 start -->
+                <div class="layui-carousel my-carousel" id="my-carouse1">
+                    <div carousel-item>
+                        <div><img src="/img/1.jpeg" class="roll-img" /></div>
+                        <div><img src="/img/2.jpeg" class="roll-img" /></div>
+                        <div><img src="/img/3.jpeg" class="roll-img" /></div>
+                        <!-- <div><img src="/static/img/roll04.jpg" class="roll-img" /></div>
+                        <div><img src="/static/img/roll05.jpg" class="roll-img" /></div> -->
+                    </div>
+                </div>
+                <!-- 轮播图 end -->
+                <!-- 功能面板 start -->
+                <div class="layui-bg-gray" style="padding: 30px;">
+                    <div class="layui-row layui-col-space15">
+
+                        <div class="layui-col-md6">
+                            <div class="layui-card">
+                                <div class="layui-card-header">
+                                    用户社区
+                                    <a href="" class="card-header-more">
+                                        更多
+                                        <i class="layui-icon layui-icon-right"></i>
+                                    </a>
+                                </div>
+                                <div class="layui-card-body">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="layui-col-md6">
+                            <div class="layui-card">
+                                <div class="layui-card-header">
+                                    在线商城
+                                    <a href="" class="card-header-more">
+                                        更多
+                                        <i class="layui-icon layui-icon-right"></i>
+                                    </a>
+                                </div>
+                                <div class="layui-card-body">
+                                    结合 layui 的栅格系统<br>
+                                    轻松实现响应式布局
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="layui-col-md6">
+                            <div class="layui-card">
+                                <div class="layui-card-header">
+                                    我的设备
+                                    <a href="" class="card-header-more">
+                                        更多
+                                        <i class="layui-icon layui-icon-right"></i>
+                                    </a>
+                                </div>
+                                <div class="layui-card-body">
+                                    结合 layui 的栅格系统<br>
+                                    轻松实现响应式布局
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="layui-col-md6">
+                            <div class="layui-card">
+                                <div class="layui-card-header">
+                                    数据
+                                    <a href="" class="card-header-more">
+                                        更多
+                                        <i class="layui-icon layui-icon-right"></i>
+                                    </a>
+                                </div>
+                                <div class="layui-card-body">
+                                    结合 layui 的栅格系统<br>
+                                    轻松实现响应式布局
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- 功能面板 end -->
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+<script>
+    layui.use('carousel', function () {
+        var carousel = layui.carousel;
+        //建造实例
+        carousel.render({
+            elem: '#my-carouse1',
+            height: "300px",
+            width: '100%', //设置容器宽度
+            arrow: 'always', //始终显示箭头
+            // anim: 'updown' //切换动画方式
+        });
+    });
+</script>
+</html>

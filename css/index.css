@@ -1,0 +1,16 @@
+.main-content{
+    background-color: #eeeeee;
+}
+
+/* .mycarousel  */
+
+.roll-img{
+    height:300px;
+    width:100%;
+}
+
+.card-header-more{
+    position: absolute;
+    right:0;
+    margin-right:25px;
+}

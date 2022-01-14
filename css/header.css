@@ -1,0 +1,29 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+.layui-header{
+    min-width: 888px;
+}
+
+.nav-left{
+    position: absolute;
+    left:0;
+}
+.nav-right{
+    position:absolute;
+    right:0;
+    margin: 0 20px;
+}
+
+.layui-nav .layui-badge, .layui-nav .layui-badge-dot{
+    display:none;
+}
+.btn-box{
+    display: flex;
+    justify-content: space-evenly
+}
+.btn-box button{
+    display:inline-block;
+    
+}

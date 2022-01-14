@@ -1,0 +1,107 @@
+.clearfix {
+    zoom: 1;
+    display: table;
+    width: 100%;
+}
+.clearfix:after {
+    content: "";
+    display: block;
+    clear: both;
+    height: 0;
+}
+
+*{
+    margin:0;
+    padding:0;
+}
+
+.running{
+    display:inline-block;
+    height:10px;
+    width:10px;
+    border-radius: 5px;
+    background-color: gray;
+}
+.running-tip{
+    display:inline-block;
+}
+.mainBox {
+    height: 500px;
+    width: 60vw;
+    margin: 5vh auto;
+    border: 1px #000 solid;
+    box-sizing: border-box;
+}
+
+.list {
+    display: inline-block;
+    height: 500px;
+    width: 30%;
+    border: 1px #000 solid;
+    box-sizing: border-box;
+    overflow: auto;
+}
+.list li{
+    box-sizing: border-box;
+    display:block;
+    margin:2px;
+    background-color: aliceblue;
+    cursor:pointer;
+}
+
+.contentLarge{
+    display:inline-block;
+    height:500px;
+    width:70%;
+    border:1px #000 solid;
+    box-sizing: border-box;
+    vertical-align: top;
+}
+
+.content {
+    display: inline-block;
+    height: 70%;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px #000 solid;
+    overflow: auto;
+}
+.content .content-chat{
+    /* height:100%; */
+    width:100%;
+    background-color: antiquewhite;
+    /* overflow: scroll; */
+}
+.cur-view{
+    display:inherit;
+}
+.other-view{
+    display:none;
+}
+
+.send{
+    display: inline-block;
+    height: 30%;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px #000 solid;
+}
+.textInput{
+    height:100%;
+    width:80%;
+}
+.sendBtn{
+    height:100%;
+    width:15%;
+    vertical-align: top;
+}
+.recv{
+    text-align: left;
+    display:block;
+    margin-left:5px;
+}
+.sendMsg{
+    text-align: right;
+    display:block;
+    margin-right:5px;
+}
