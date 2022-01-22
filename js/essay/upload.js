@@ -4,6 +4,12 @@ $(function(){
     })
 
     $("#essay-submit").click(function(){
+        var title = $("#essay-title").val();
+        var content = CKEDITOR.instances.rich_editor.getData();
+        if(title=="" || content==""){
+            layer.msg("请完整编辑");
+            return;
+        }
         layer.confirm("确认提交？", {
             icon:3,
             title:"提示",

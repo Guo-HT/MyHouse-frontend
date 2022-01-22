@@ -1,0 +1,57 @@
+.my_container{
+    padding-top:16px;
+    /* background-color: #eeeeee; */
+}
+.list_header{
+    margin-top:10px;
+    background-color: #eeeeee;
+    height:40px;
+    line-height:40px;
+    border:solid 1px #CDCDCD;
+}
+.list_header *{
+    box-sizing:border-box;
+    padding-left: 1%;
+}
+.list_body_ul{
+    border:solid 1px #CDCDCD;
+}
+.list_body_ul .list_body_li{
+    border-bottom: #eeeeee solid 2px;
+}
+.list_body_ul .list_body_li:last-child{
+    border-bottom: none;
+}
+.list_body_ul .list_body_li:hover{
+    background-color: #eeeeee;
+}
+.list_body_ul div{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0 1%;
+    height:40px;
+    line-height: 40px;
+}
+.list_body_ul .title{
+    font-weight: bolder;
+}
+.list_body_ul .content{
+    color: #9EA09E;
+}
+.list_body_ul .writer{
+    color:rgb(109, 109, 167);
+    font-weight: 600;
+    font-size:14px;
+}
+.list_body_ul .datetime{
+    color: #9ea09e;
+}
+.list_body_ul .watched{
+    text-align: center;
+    color:rgb(245, 160, 32);
+    font-weight: bold;
+}
+.page_nav{
+    text-align: center;
+}

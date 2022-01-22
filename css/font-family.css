@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+@font-face{
+    font-family: "hack_regular";
+    src: url("/font/Hack/hack-regular-subset.woff") format("woff"),
+       url("/font/Hack/hack-regular-subset.woff2") format("woff2");
+    font-weight: bold;
+    font-style: normal;
+}

@@ -14,3 +14,37 @@
     right:0;
     margin-right:25px;
 }
+
+.org_li{
+    height:40px;
+    border-bottom: 1px rgb(230, 225, 225) solid;
+}
+.org_li:last-child{
+    border-bottom: none;
+}
+.org_li_title{
+    display: inline-block;
+    font-weight: bolder;
+    max-width:38%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    line-height:40px;
+}
+.org_li_content{
+    display: inline-block;
+    color:rgb(152,152,152);
+    margin-left:5%;
+    line-height:40px;
+    font-weight: 200;
+    font-size:12px;
+    vertical-align: top;
+    max-width:38%;
+    overflow: hidden;
+    height:40px;
+}
+.org_list_badge{
+    margin:9px;
+    float:right
+}

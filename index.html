@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/header.css">
     <script src="/layui-v2.5.7/layui.js"></script>
+    <script src="/js/index/get_list.js"></script>
 
 </head>
 
@@ -40,53 +41,20 @@
                 <!-- 功能面板 start -->
                 <div class="layui-bg-gray" style="padding: 30px;">
                     <div class="layui-row layui-col-space15">
-
                         <div class="layui-col-md6">
                             <div class="layui-card">
                                 <div class="layui-card-header">
                                     用户社区
-                                    <a href="" class="card-header-more">
+                                    <a href="/org/index.html" class="card-header-more">
                                         更多
                                         <i class="layui-icon layui-icon-right"></i>
                                     </a>
                                 </div>
                                 <div class="layui-card-body">
+                                    <ul class="org_ul" id="org_ul"></ul>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="layui-col-md6">
-                            <div class="layui-card">
-                                <div class="layui-card-header">
-                                    在线商城
-                                    <a href="" class="card-header-more">
-                                        更多
-                                        <i class="layui-icon layui-icon-right"></i>
-                                    </a>
-                                </div>
-                                <div class="layui-card-body">
-                                    结合 layui 的栅格系统<br>
-                                    轻松实现响应式布局
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="layui-col-md6">
-                            <div class="layui-card">
-                                <div class="layui-card-header">
-                                    我的设备
-                                    <a href="" class="card-header-more">
-                                        更多
-                                        <i class="layui-icon layui-icon-right"></i>
-                                    </a>
-                                </div>
-                                <div class="layui-card-body">
-                                    结合 layui 的栅格系统<br>
-                                    轻松实现响应式布局
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="layui-col-md6">
                             <div class="layui-card">
                                 <div class="layui-card-header">
@@ -97,11 +65,26 @@
                                     </a>
                                 </div>
                                 <div class="layui-card-body">
-                                    结合 layui 的栅格系统<br>
-                                    轻松实现响应式布局
+                                    <ul class="data_ul" id="data_ul"></ul>
                                 </div>
                             </div>
                         </div>
+                        <div class="layui-col-md6">
+                            <div class="layui-card">
+                                <div class="layui-card-header">
+                                    我的设备
+                                    <a href="" class="card-header-more">
+                                        更多
+                                        <i class="layui-icon layui-icon-right"></i>
+                                    </a>
+                                </div>
+                                <div class="layui-card-body">
+                                    <ul class="machine_ul" id="machine_ul"></ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        
 
                     </div>
                 </div>
@@ -109,8 +92,6 @@
             </div>
         </div>
     </div>
-
-
 
 
 </body>

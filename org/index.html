@@ -1,12 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>玩家社区</title>
+    <script src="/js/backend_url.js"></script>
+    <script src="/js/jquery-1.12.4.min.js"></script>
+    <link rel="stylesheet" href="/layui-v2.5.7/css/layui.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <script src="/layui-v2.5.7/layui.js"></script>
+    <link rel="stylesheet" href="/css/essay/index.css">
+    <script src="/js/essay/get_essay_list.js"></script>
 </head>
+
 <body>
+    <!-- 页头 start -->
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header" id="myhead">
+        </div>
+    </div>
+    <script src="/js/user/user_status.js"></script>
+    <script src="/js/header.js"></script>
+    <!-- 页头 end -->
+
+    <div class="layui-container my_container">
+        <div class="layui-row">
+            <div class="layui-col-md12">
+                <fieldset class="layui-elem-field">
+                    <legend>玩家社区</legend>
+                    <div class="layui-field-box">
+                        这是一个为各位玩家、用户提供的分享、交流玩法经验的板块。<br>
+                        希望大家友好交流，玩出新花样
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <h2 id="search_str"></h2>
+        <div class="layui-row list_header">
+            <div class="layui-col-md3 layui-col-xs3">标题</div>
+            <div class="layui-col-md4 layui-col-xs3">内容摘要</div>
+            <div class="layui-col-md2 layui-col-xs2">作者</div>
+            <div class="layui-col-md2 layui-col-xs2">时间</div>
+            <div class="layui-col-md1 layui-col-xs2">浏览量</div>
+        </div>
+        <div class="layui-row list_body" id="list_body_div">
+            <ul class="list_body_ul layui-clear" id="list_body_ul">
+            </ul>
+            
+        </div>
+    </div>
+    <div class="layui-container my_container">
+        <div class="layui-row">
+            <div class="layui-col-md12">
+                <div id="page_nav" class="page_nav"></div>
+            </div>
+        </div>
+    </div>
     
+           
+
 </body>
+
 </html>

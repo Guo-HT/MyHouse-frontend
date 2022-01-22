@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点灯</title>
+    <script src="/js/backend_url.js"></script>
+    <script src="/js/jquery-1.12.4.min.js"></script>
+    <script>
+        $(function(){
+            var ledState = 0;
+            $("#ledToggle").click(function(){
+                ledState = ledState==0?1:0;
+                $.ajax({
+                    url:app_root+"/data/mqtt_test",
+                    type:"get",
+                    dataType:"json",
+                    data:{
+                        ledState:ledState,
+                    }
+                }).done(function(msg){
+                    console.log(msg);
+                }).fail(function(e){
+                    console.log(e);
+                })
+
+            })
+
+            function get_machine_data(){
+                $.ajax({
+                    url:app_root+"/data/get_machine_data",
+                    type:"get",
+                    dataType:"json",
+
+                }).done(function(msg){
+                    var data = msg["msg"];
+                    console.log(data);
+                    $("#temp").text(data.temp);
+                    $("#humidity").text(data.humidity);
+                    $("#get_time").text(data.time);
+
+
+                }).fail(function(e){
+
+                })
+
+
+            }
+            get_machine_data();
+            setInterval(get_machine_data, 10000);
+
+
+
+
+
+        })
+    </script>
+</head>
+<body>
+    <button id="ledToggle">开/关灯</button><br><br>
+    温度：<span id="temp">-</span>℃<br><br>
+    湿度：<span id="humidity">-</span>% <br><br>
+    采集时间：<span id="get_time">-</span><br><br>
+</body>
+</html>

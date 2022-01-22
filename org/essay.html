@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章内容</title>
+    <script src="/js/backend_url.js"></script>
+    <script src="/js/jquery-1.12.4.min.js"></script>
+    <script src="/js/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="/layui-v2.5.7/css/layui.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <script src="/layui-v2.5.7/layui.js"></script>
+    <link rel="stylesheet" href="/css/font-family.css">
+    <link rel="stylesheet" href="/css/essay/detail.css">
+    <script src="/js/essay/get_essay.js"></script>
+    <script src="/js/essay/detail.js"></script>
+    <script src="/js/essay/get_comments.js"></script>
+</head>
+
+<body>
+    <!-- 页头 start -->
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header" id="myhead">
+        </div>
+    </div>
+    <script src="/js/user/user_status.js"></script>
+    <script src="/js/header.js"></script>
+    <!-- 页头 end -->
+
+    <div class="layui-container">
+        <div class="layui-row">
+            <div class="layui-col-md8  main-content">
+                <!-- 标题 start -->
+                <h1 class="title" id="title"></h1>
+                <!-- 标题 end -->
+                <hr>
+                <!-- 数据 start -->
+                <div class="essay_info">
+                    <div class="layui-row">
+                        <div class="layui-col-md3  layui-col-xs3">
+                            <i class="layui-icon layui-icon-time"></i>
+                            <span class="time" id="upload_time"></span>
+                        </div>
+                        <div class="layui-col-md3  layui-col-xs3">
+                            <i class="layui-icon layui-icon-username"></i>
+                            <span class="upload_user" id="upload_user"></span>
+                        </div>
+                        <div class="layui-col-md3  layui-col-xs3">
+                            <i class="layui-icon layui-icon-praise"></i>
+                            <span class="good_num" id="good_num"></span>
+                        </div>
+                        <div class="layui-col-md3  layui-col-xs3">
+                            <i class="layui-icon layui-icon-dialogue"></i>
+                            <span class="commend_num" id="commend_num"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 数据 end -->
+                <hr>
+                <!-- 正文 start -->
+                <div class="essay_content" id="essay_content">
+                </div>
+                <!-- 正文 end -->
+
+                <!-- 结束栏 start -->
+                <div class="essay_end">
+                    <div class="layui-row layui-clear">
+                        <div class="layui-col-md2  layui-col-xs2">
+                            <div class="good_icon" id="do_good"><svg t="1642736713577" class="icon"
+                                    viewbox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2176"
+                                    width="20" height="20">
+                                    <path
+                                        d="M857.28 344.992h-264.832c12.576-44.256 18.944-83.584 18.944-118.208 0-78.56-71.808-153.792-140.544-143.808-60.608 8.8-89.536 59.904-89.536 125.536v59.296c0 76.064-58.208 140.928-132.224 148.064l-117.728-0.192A67.36 67.36 0 0 0 64 483.04V872c0 37.216 30.144 67.36 67.36 67.36h652.192a102.72 102.72 0 0 0 100.928-83.584l73.728-388.96a102.72 102.72 0 0 0-100.928-121.824zM128 872V483.04c0-1.856 1.504-3.36 3.36-3.36H208v395.68H131.36A3.36 3.36 0 0 1 128 872z m767.328-417.088l-73.728 388.96a38.72 38.72 0 0 1-38.048 31.488H272V476.864a213.312 213.312 0 0 0 173.312-209.088V208.512c0-37.568 12.064-58.912 34.72-62.176 27.04-3.936 67.36 38.336 67.36 80.48 0 37.312-9.504 84-28.864 139.712a32 32 0 0 0 30.24 42.496h308.512a38.72 38.72 0 0 1 38.048 45.888z"
+                                        p-id="2177" fill="#1296db"></path>
+                                </svg></div>
+                            <span class="good_num" id="good_num_2"></span>
+                        </div>
+                        <div class="layui-col-md2 layui-col-xs2">
+                            <div class="watch_icon"><svg t="1642737425455" class="icon" viewbox="0 0 1024 1024"
+                                    version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3667" width="20" height="20">
+                                    <path
+                                        d="M512.173 795c171.39 0 318.422-118.888 356.196-283.157C830.477 347.727 683.517 229 512.245 229c-171.39 0-318.422 118.888-356.197 283.157C193.941 676.273 340.9 795 512.173 795zM75.93 504.096C118.297 298.658 299.91 149 512.245 149c212.19 0 393.717 149.458 436.234 354.712a40 40 0 0 1 0.007 16.192C906.121 725.342 724.507 875 512.173 875c-212.191 0-393.718-149.458-436.235-354.712a40 40 0 0 1-0.007-16.192zM512 704c-106.039 0-192-85.961-192-192s85.961-192 192-192 192 85.961 192 192-85.961 192-192 192z m0-80c61.856 0 112-50.144 112-112s-50.144-112-112-112-112 50.144-112 112 50.144 112 112 112z"
+                                        p-id="3668" fill="#1296db"></path>
+                                </svg></div>
+                            <span class="watch_num" id="watch_num"></span>
+                        </div>
+                        <div class="layui-col-md2 layui-col-xs2">
+                            <div class="share_icon" id="share"><svg t="1642738903573" class="icon"
+                                    viewbox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4580"
+                                    width="20" height="20">
+                                    <path
+                                        d="M558.933333 699.733333l-170.666666-93.866666c-25.6 21.333333-55.466667 34.133333-89.6 34.133333-72.533333 0-128-55.466667-128-128s55.466667-128 128-128c38.4 0 68.266667 17.066667 93.866666 38.4L597.333333 320V298.666667c0-72.533333 55.466667-128 128-128s128 55.466667 128 128-55.466667 128-128 128c-34.133333 0-64-12.8-85.333333-34.133334l-213.333333 110.933334v21.333333l174.933333 98.133333c21.333333-17.066667 51.2-29.866667 81.066667-29.866666 72.533333 0 128 55.466667 128 128s-55.466667 128-128 128-128-55.466667-128-128c0-4.266667 0-12.8 4.266666-21.333334zM298.666667 554.666667c25.6 0 42.666667-17.066667 42.666666-42.666667s-17.066667-42.666667-42.666666-42.666667-42.666667 17.066667-42.666667 42.666667 17.066667 42.666667 42.666667 42.666667z m426.666666-213.333334c25.6 0 42.666667-17.066667 42.666667-42.666666s-17.066667-42.666667-42.666667-42.666667-42.666667 17.066667-42.666666 42.666667 17.066667 42.666667 42.666666 42.666666z m-42.666666 426.666667c25.6 0 42.666667-17.066667 42.666666-42.666667s-17.066667-42.666667-42.666666-42.666666-42.666667 17.066667-42.666667 42.666666 17.066667 42.666667 42.666667 42.666667z"
+                                        fill="#1296db" p-id="4581"></path>
+                                </svg></div>
+                            <span class="share_tip">分享</span>
+                        </div>
+                        <div class="layui-col-md6"></div>
+                    </div>
+                </div>
+                <!-- 结束栏 end -->
+
+                <!-- 评论 start -->
+                <div class="comment">
+                    <!-- 分割线 start -->
+                    <fieldset class="layui-elem-field layui-field-title">
+                        <legend class="comment_title" style="font-size:14px;"><span id="comments_num">0</span> 评论</legend>
+                    </fieldset>
+                    <!-- 分割线 end -->
+
+                    <!-- 发布 start -->
+                    <div class="layui-row layui-clear">
+                        <div class="input_comment_div layui-col-md10 layui-col-xs10">
+                            <textarea name="desc" placeholder="请输入内容" class="input_comment" id="input_comment"></textarea>
+                        </div>
+                        <div class="submit_comment_div layui-col-md2 layui-col-xs2">
+                            <button class="submit_comment" id="submit_comment">发表评论</button>
+                        </div>
+                    </div>
+                    <!-- 发布 end -->
+
+                    <!-- 评论内容 start -->
+                    <ul class="comment_list" id="comment_list">
+                    </ul>
+
+                    <!-- 评论内容 end -->
+
+                    <!-- 评论分页 start -->
+                    <div class="layui-row">
+                        <div class="layui-col-md12">
+                            <div class="comment_nav" id="comment_nav"></div>
+                        </div>
+                    </div>
+                    <!-- 评论分页 end -->
+                    
+                </div>
+
+
+
+
+                <!-- 评论 end -->
+            </div>
+            <!-- 正文 end -->
+
+            <!-- 侧边栏 start -->
+            <div class="layui-col-md4  side-bar">
+                <!-- 搜索 start -->
+                <div class="search_box">
+                    <input type="text" class="search_input" id="search_input" placeholder=" 站内搜索">
+                    <button type="button" class="layui-btn layui-btn-sm search_btn" id="search_btn">搜 索</button>
+                </div>
+                <!-- 搜索 end -->
+
+                <!-- 热门 start -->
+                <div class="essays">
+                    <div class="essays_title">热门文章</div>
+                    <ul id="hot_essay" class="essays_ul">
+
+                    </ul>
+                </div>
+                <!-- 热门 end -->
+
+                <!-- 近期 start -->
+                <div class="essays">
+                    <div class="essays_title">近期文章</div>
+                    <ul id="recent_essay" class="essays_ul">
+                    </ul>
+                </div>
+                <!-- 近期 end -->
+            </div>
+            <!-- 侧边栏 end -->
+        </div>
+    </div>
+</body>
+
+</html>
