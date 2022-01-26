@@ -28,6 +28,11 @@ $(function(){
             $("#commend_num").text(data.comment_num);
             $("#essay_content").html(data.content);
             $("#watch_num").text(data.watch_num)
+            if(data.is_collect=="true"){
+                $("#collect_tip").text("已收藏");
+            }else{
+                $("#collect_tip").text("收藏");
+            }
         }
     }).fail(function(e){
         console.log(e);

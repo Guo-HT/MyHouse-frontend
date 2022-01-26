@@ -26,12 +26,54 @@ $(function () {
             },
             crossDomain: true,
         }).done(function (msg) {
+            if(msg.state=="fail" && msg.msg=="jump to login"){
+                layer.msg("请登录");
+                return;
+            }
             $("#good_num").html(msg.msg.good_num);
             $("#good_num_2").html(msg.msg.good_num);
         }).fail(function (e) {
             console.log(e);
         })
     })
+
+        // 收藏，点过-1，没点过+1
+        $("#collect").click(function () {
+            if($.cookie("is_login")!="true"){
+                location.href="/user/login.html";
+            }
+            var paramsStr = window.location.search
+            var params = new URLSearchParams(paramsStr)
+            var id = params.get('id') // list
+            if (!id) {
+                id = 1;
+            }
+            $.ajax({
+                url: app_root + "/essay/do_collect",
+                type: "post",
+                dataType: "json",
+                data: {
+                    id: id,
+                },
+                xhrFields: {
+                    withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
+                },
+                crossDomain: true,
+            }).done(function (msg) {
+                console.log(msg);
+                if(msg.state=="fail" && msg.msg=="jump to login"){
+                    layer.msg("请登录");
+                    return;
+                }
+                if(msg.msg.collect_state=="true"){
+                    $("#collect_tip").text("已收藏");
+                }else{
+                    $("#collect_tip").text("收藏");
+                }
+            }).fail(function (e) {
+                console.log(e);
+            })
+        })
 
     // 点击分享 链接拷贝至剪切板
     $("#share").click(function () {

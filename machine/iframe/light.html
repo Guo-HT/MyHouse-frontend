@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点灯</title>
+    <script src="/js/backend_url.js"></script>
+    <script src="/js/jquery-1.12.4.min.js"></script>
+    <link rel="stylesheet" href="/layui-v2.5.7/css/layui.css">
+    <script src="/layui-v2.5.7/layui.js"></script>
+    <link rel="stylesheet" href="/css/machine/iframe/light.css">
+    <link rel="stylesheet" href="/css/machine/iframe/cut_bind.css">
+    <script src="/js/machine/iframe/light.js"></script>
+    <script src="/js/machine/iframe/cut_bind.js"></script>
+
+</head>
+<body>
+    <div class="layui-row main_box">
+        <div class="layui-col-md8 layui-col-sm8 layui-col-xs8 layui-col-md-offset2 layui-col-xs-offset2 layui-col-sm-offset2 switch_large_box">
+
+            <div class="layui-col-md6 layui-col-xs6 layui-col-sm6 light_status" id="light_status">
+                未开启
+            </div>
+
+            <div class="layui-col-md6 layui-col-xs6 layui-col-sm6 light_switch">
+                <button class="layui-btn layui-btn-lg" id="light_btn">开/关灯</button>  <!-- layui-btn-normal-->
+            </div>
+        </div>
+
+        <div class="layui-col-md12 layui-col-xs12 layui-col-sm12">
+            <h3>历史数据(最近20条)</h3>
+            <ul class="data_history" id="data_history"></ul>
+        </div>
+
+        <div class="layui-col-md12 layui-col-xs12 layui-col-sm12 cut_bind">
+            <button class="layui-btn layui-btn-danger layui-btn-xs" id="cut_bind_btn">解除绑定</button>
+        </div>
+    </div>
+    <script>
+        //Demo
+        layui.use('form', function () {
+            var form = layui.form;
+
+        });
+    </script>
+</body>
+</html>

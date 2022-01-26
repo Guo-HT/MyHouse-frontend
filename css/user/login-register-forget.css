@@ -32,3 +32,9 @@ body{
     vertical-align: bottom;
     margin: 8px 0;
 }
+
+.layui-input-block{
+    display:flex;
+    margin:0 70px;
+    justify-content: space-evenly;
+}

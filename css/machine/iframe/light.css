@@ -1,0 +1,40 @@
+.main_box{
+    padding:20px 100px;
+}
+
+.switch_large_box{
+    box-sizing: border-box;
+    border:3px #eeeeee solid;
+    border-radius: 10px;
+    height:150px;
+    margin-bottom: 20px;
+}
+
+.light_status{
+    line-height:150px;
+    text-align: center;
+    font-size:28px;
+}
+
+.light_switch button{
+    display:block;
+    height:60px;
+    width:50%;
+    margin:45px auto;
+}
+
+.cmd_off, .cmd_on{
+    display:block;
+    text-align: center;
+    height:28px;
+    line-height:28px;
+    margin-top:10px;
+    border-radius: 10px;
+}
+
+.cmd_off{
+    background-color: #eeeeee;
+}
+.cmd_on{
+    background-color: rgb(162, 235, 235);
+}

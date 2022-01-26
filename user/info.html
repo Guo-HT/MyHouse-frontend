@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,10 +12,13 @@
     <link rel="stylesheet" href="/css/header.css">
     <script src="/layui-v2.5.7/layui.js"></script>
     <link rel="stylesheet" href="/css/user/info.css">
+    <script src="/js/user/upload_head.js"></script>
+    <script src="/js/user/get_info.js"></script>
 </head>
+
 <body>
-      <!-- 页头 start -->
-      <div class="layui-layout layui-layout-admin">
+    <!-- 页头 start -->
+    <div class="layui-layout layui-layout-admin">
         <div class="layui-header" id="myhead">
         </div>
     </div>
@@ -23,13 +27,93 @@
     <!-- 页头 end -->
 
     <div class="layui-container">
-        <div class="layui-row">
-            <div class="layui-col-md12  main-content">
+        <!-- 选项卡 start -->
+        <div class="layui-tab">
+            <!-- 选项卡 start -->
+            <ul class="layui-tab-title nav_ul">
+                <li class="layui-this">个人信息</li>
+                <li id="history_switch">浏览记录</li>
+                <li id="collection_switch">我的收藏</li>
+                <li id="good_switch">我赞过的</li>
+            </ul>
+            <!-- 选项卡 end -->
 
 
+            <div class="layui-tab-content layui-col-md12 main_content">
+                <!-- 个人信息 start -->
+                <div class="layui-tab-item layui-show">
+                    <div class="head_photo_box">
+                        <img src="/img/default-head.png" alt="" id="user_head">
+                        <button type="button" class="layui-btn upload_btn" id="upload_head">
+                            <i class="layui-icon">&#xe67c;</i>上传头像
+                        </button>
+                    </div>
+                    <div class="info_box">
+                        <ul>
+                            <li class="info_detail_box username_box">
+                                <h1 id="user_name_detail">用户名</h1>
+                            </li>
+                            <li class="info_detail_box intro_box">
+                                <span class="lable">介绍</span><span class="info" id="intro">因为热爱，所以执着</span>
+                            </li>
+                            <li class="info_detail_box user_id_box">
+                                <span class="lable">编号</span><span class="info" id="user_id">未知</span>
+                            </li>
+                            <li class="info_detail_box gender_box">
+                                <span class="lable">性别</span><span class="info">未知</span>
+                            </li>
+                            <li class="info_detail_box email_box">
+                                <span class="lable">邮箱</span><span class="info" id="email_info">1622761893@qq.com</span>
+                            </li>
+                            <li class="info_detail_box reg_time_box">
+                                <span class="lable">注册时间</span><span class="info" id="reg_time">未知</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 个人信息 end -->
+
+                <!-- 浏览记录 start -->
+                <div class="layui-tab-item">
+                    <div class="layui-row" id="history_content">
+                        
+                    </div>
+                    <div id="nav_his" class="my_nav"></div>
+                </div>
+                <!-- 浏览记录 end -->
+
+                <!-- 我的收藏 start -->
+                <div class="layui-tab-item">
+                    <div class="layui-row" id="collection_content">
+                        
+                    </div>
+                    <div id="nav_coll" class="my_nav"></div>
+                </div>
+                <!-- 我的收藏 end -->
+
+                <!-- 我赞过的 start -->
+                <div class="layui-tab-item">
+                    <div class="layui-row" id="good_content">
+                        
+                    </div>
+                    <div id="nav_good" class="my_nav"></div>
+                </div>
+                <!-- 我赞过的 end -->
+                
             </div>
         </div>
+        <!-- 选项卡 end -->
+
+
     </div>
-    
+
 </body>
+
+<script>
+    //注意：选项卡 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function () {
+        var element = layui.element;
+    });
+</script>
+
 </html>

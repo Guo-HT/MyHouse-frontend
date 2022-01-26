@@ -2,7 +2,8 @@ body{
     background-color: rgb(245,246,247);
 }
 .cke_chrome{
-    display:flex;border:1px solid #d1d1d1;padding:0
+    display:flex;
+    border:1px solid #d1d1d1;padding:0
 }
 .upload-content h3{
     text-align: center;

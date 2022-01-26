@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>温湿度</title>
+    <script src="/js/backend_url.js"></script>
+    <script src="/js/jquery-1.12.4.min.js"></script>
+    <link rel="stylesheet" href="/layui-v2.5.7/css/layui.css">
+    <script src="/layui-v2.5.7/layui.js"></script>
+    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+    <link rel="stylesheet" href="/css/machine/iframe/dht11.css">
+    <link rel="stylesheet" href="/css/machine/iframe/cut_bind.css">
+    <script src="/js/machine/iframe/dht11.js"></script>
+    <script src="/js/machine/iframe/cut_bind.js"></script>
+</head>
+
+<body>
+    <div class="layui-row clock_box">
+        <div class="layui-col-md6 layui-col-sm6 layui-col-xs6">
+            <div class="clock" id="temperature_clock" style="width:80%;height:calc(40vw - 80px);"></div>
+        </div>
+        <div class="layui-col-md6 layui-col-sm6 layui-col-xs6">
+            <div class="clock" id="humidity_clock" style="width:80%;height:calc(40vw - 80px);"></div>
+        </div>
+    </div>
+    <div class="layui-row category_box">
+        <div class="layui-col-md6 layui-col-sm6 layui-col-xs6">
+            <div class="category" id="temperature_category" style="width:80%;height:calc(40vw - 80px);"></div>
+        </div>
+        <div class="layui-col-md6 layui-col-sm6 layui-col-xs6">
+            <div class="category" id="humidity_category" style="width:80%;height:calc(40vw - 80px);"></div>
+        </div>
+    </div>
+    <div class="layui-row">
+        <div class="layui-col-md12 layui-col-xs12 layui-col-sm12 cut_bind">
+            <button class="layui-btn layui-btn-danger layui-btn-xs" id="cut_bind_btn">解除绑定</button>
+        </div>
+    </div>
+</body>
+
+</html>

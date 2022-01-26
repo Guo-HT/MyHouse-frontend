@@ -1,0 +1,57 @@
+.machine_list{
+    padding: 20px 0;
+    box-sizing: border-box;
+    height:calc(100vh - 60px);
+    background-color: aliceblue;
+    overflow: auto;
+}
+
+.machine_li {
+    width:60%;
+    margin: 10px auto;
+    cursor: pointer;
+    text-align: center;
+    /* letter-spacing: 4px; */
+}
+
+.machine_li img{
+    display: block;
+    width:60%;
+    margin:0 auto;
+}
+
+.layui-card-header{
+    padding:0 10px;
+}
+
+.machine_name{
+    display:inline-block;
+    width:90%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+}
+.dot{
+    width:10%;
+    max-width:10px;
+}
+
+.offline{
+    background-color:#d2d2d2;
+
+}
+.online{
+    background-color:red
+}
+
+.data_field{
+    padding-left:10px;
+}
+
+.machine_data{
+    height:calc(100vh - 140px);
+    width:100%;
+    box-sizing: border-box;
+    /* border:1px solid #000; */
+}

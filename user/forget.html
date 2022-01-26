@@ -12,9 +12,18 @@
     <script src="/layui-v2.5.7/layui.js"></script>
     <link rel="stylesheet" href="/css/user/login-register-forget.css">
     <script src="/js/user/forget.js"></script>
+    <link rel="stylesheet" href="/css/header.css">
 </head>
 
 <body>
+        <!-- 页头 start -->
+        <div class="layui-layout layui-layout-admin">
+            <div class="layui-header" id="myhead">
+            </div>
+        </div>
+        <script src="/js/user/user_status.js"></script>
+        <script src="/js/header.js"></script>
+        <!-- 页头 end -->
     <div class="layui-container">
         <div class="layui-row">
             <div
@@ -39,7 +48,7 @@
                                 autocomplete="off" class="layui-input" id="user-verify">
                         </div>
                         <input type="button" class="layui-btn layui-btn-xs get-verify" id="get-verify" value="获取验证码">
-                    </div>
+                    </div><br>
                     <!-- 密码框 start -->
                     <div class="layui-form-item">
                         <label class="layui-form-label">密&nbsp;&nbsp;&nbsp;&nbsp;码</label>

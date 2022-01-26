@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设备绑定</title>
+    <script src="/js/backend_url.js"></script>
+    <script src="/js/jquery-1.12.4.min.js"></script>
+    <script src="/js/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="/layui-v2.5.7/css/layui.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <script src="/layui-v2.5.7/layui.js"></script>
+    <link rel="stylesheet" href="/css/machine/bind.css">
+    <script src="/js/machine/work_type.js"></script>
+    <script src="/js/machine/bind.js"></script>
+</head>
+
+<body>
+    <!-- 页头 start -->
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header" id="myhead">
+        </div>
+    </div>
+    <script src="/js/user/user_status.js"></script>
+    <script src="/js/header.js"></script>
+    <!-- 页头 end -->
+
+    <div class="layui-container">
+        <div class="layui-row">
+            <div class="layui-col-md12">
+                <fieldset class="layui-elem-field">
+                    <legend>设备绑定</legend>
+                    <div class="layui-field-box">
+                        1. 点击你要绑定的设备类型
+                        <br><br>
+                        2. 输入设备外壳上标记的字符串，它类似这样：A1:B2:C3:D4:E5:F6
+                        <br><br>
+                        3. 根据提示，判断是否绑定成功
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+
+        <div class="layui-row">
+
+            <!-- 一个卡片 start -->
+            <div class="my-col-md3 my_machine">
+                <div class="layui-card">
+                    <div class="my_card">
+                        <div class="layui-card-body">
+                            <img src="/img/light.jpg" alt="开关舵机">
+                        </div>
+                        <div class="layui-card-header">灯开关</div>
+                    </div>
+                    <div class="sn_input_box">
+                        <div class="sn_input_inner_box">
+                            <input type="hidden" name="func" value="light" class="func">
+                            <input type="text" name="sn_input" class="sn_input machine_input" placeholder="输入设备上的序列号">
+                            <input type="text" name="name_input" class="machine_name_input machine_input" placeholder="输入设备上名称，如：卧室的灯">
+                            <button class="layui-btn layui-btn-normal layui-btn layui-btn-xs do_bind">绑定设备</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 一个卡片 end -->
+
+
+            <!-- 一个卡片 start -->
+            <div class="my-col-md3 my_machine">
+                <div class="layui-card">
+                    <div class="my_card">
+                        <div class="layui-card-body">
+                            <img src="/img/dht11.jpg" alt="温湿度传感器">
+                        </div>
+                        <div class="layui-card-header">温湿度</div>
+                    </div>
+                    <div class="sn_input_box">
+                        <div class="sn_input_inner_box">
+                            <input type="hidden" name="func" value="dht11" class="func">
+                            <input type="text" name="sn_input" class="sn_input machine_input" placeholder="输入设备上的序列号">
+                            <input type="text" name="name_input" class="machine_name_input machine_input" placeholder="输入设备上名称，如：卧室的灯">
+                            <button class="layui-btn layui-btn-normal layui-btn layui-btn-xs do_bind">绑定设备</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 一个卡片 end -->
+
+        </div>
+    </div>
+
+</body>
+
+</html>

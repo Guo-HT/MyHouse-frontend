@@ -1,8 +1,127 @@
-*{
-    margin:0;
-    padding:0;
+* {
+    margin: 0;
+    padding: 0;
 }
 
-body{
-    background-color: rgb(238,238,238);
+body {
+    background-color: #F4F4F4;
+}
+
+.main_content {
+    min-width: 740px;
+}
+
+.nav_ul {
+    height: 60px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding: 0 20px;
+    background: url("/img/userInfo_bg.gif");
+    /* background-color: pink; */
+    background-size: 50% 100%;
+    background-position: right;
+    background-repeat: no-repeat;
+
+}
+
+.nav_ul li {
+    width: 100px;
+}
+
+.layui-this {
+    font-weight: 700;
+}
+
+.head_photo_box {
+    display: inline-block;
+    width: 20vw;
+    height: 20vw;
+    /* background-color: aliceblue; */
+    vertical-align: top;
+    margin: 80px auto;
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.head_photo_box img {
+    display: block;
+    width: 60%;
+    height: 60%;
+    margin: calc(10vw - 30%) auto;
+    border: #eeeeee solid 2px;
+    border-radius: 2px;
+}
+
+.upload_btn {
+    height: 28px;
+    line-height: 28px;
+    width: 120px;
+    display: block;
+    margin: 0 auto;
+}
+
+.info_box {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 45vw;
+    min-width: 350px;
+    /* height:80vh; */
+    vertical-align: top;
+    padding: 0 40px 30px;
+    margin-top: 10px;
+    margin-left: 20px;
+    border-left: 1px #aeaeae solid;
+    max-width: 600px;
+    max-height: 600px;
+}
+
+.info_detail_box {
+    height: 80px;
+    line-height: 80px;
+    border-bottom: #dddddd 1px solid;
+}
+
+.info_box .lable {
+    display: inline-block;
+    width: 120px;
+    letter-spacing: 10px;
+    font-weight: 600;
+}
+
+.info_box .info {
+    min-width: 300px;
+    overflow: visible;
+}
+
+.history_card {
+    background-color: #aeaeae;
+}
+
+.history_link {
+    padding: 4px 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    vertical-align: auto;
+}
+
+.my_nav {
+    text-align: center;
+}
+
+.layui-card-header {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.layui-card-body {
+    height: 42px;
+    overflow: hidden;
+    white-space: normal;
+    text-overflow: ellipsis;
+    color: #aeaeae;
 }

@@ -12,9 +12,19 @@
     <script src="/layui-v2.5.7/layui.js"></script>
     <link rel="stylesheet" href="/css/user/login-register-forget.css">
     <script src="/js/user/login.js"></script>
+    <link rel="stylesheet" href="/css/header.css">
+
 </head>
 
 <body>
+    <!-- 页头 start -->
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header" id="myhead">
+        </div>
+    </div>
+    <script src="/js/user/user_status.js"></script>
+    <script src="/js/header.js"></script>
+    <!-- 页头 end -->
     <div class="layui-container">
         <div class="layui-row">
             <div
@@ -46,6 +56,7 @@
                         <div class="layui-input-block">
                             <input type="checkbox" name="is-remember" lay-skin="primary" id="is-remember" checked>
                             <a href="/user/forget.html">忘记/修改密码</a>
+                            <a href="/user/register.html">注册</a>
                         </div>
                     </div>
                     <!-- 按钮 start -->

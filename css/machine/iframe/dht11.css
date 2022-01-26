@@ -1,0 +1,19 @@
+*{
+    margin:0;
+    padding:0;
+}
+.clock_box{
+    padding:0 40px;
+    min-width: 750px;
+}
+.clock{
+    margin:0 10%;
+}
+.category_box{
+    padding:0 40px;
+    min-width: 750px;
+}
+
+.category{
+    margin:0 10%;
+}

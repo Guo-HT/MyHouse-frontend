@@ -14,7 +14,7 @@
 }
 
 .essay_content {
-    width: 760px;
+    /* width: 760px; */
     margin: 10px auto;
     /* font-size: 16px; */
     line-height: 30px;
@@ -81,16 +81,20 @@
 }
 
 .essay_end .good_icon,
-.essay_end .share_icon {
+.essay_end .share_icon,
+.essay_end .collect_icon {
     cursor: pointer;
+    color:blue;
+    line-height:40px;
 }
 
 .essay_end .good_icon,
 .essay_end .watch_icon,
-.essay_end .share_icon {
+.essay_end .share_icon,
+.essay_end .collect_icon {
     display: inline-block;
-    line-height: 40px;
-    padding: 6px 0;
+    margin: 6px 0;
+    vertical-align: top;
 }
 
 .essay_end .good_num,
