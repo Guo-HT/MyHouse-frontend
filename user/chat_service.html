@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我是客服</title>
+    <script src="/js/backend_url.js"></script>
+    <script src="/js/jquery-1.12.4.min.js"></script>
+    <script src="/js/jquery.cookie.js"></script>
+    <link rel="stylesheet" href="/layui-v2.5.7/css/layui.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <script src="/layui-v2.5.7/layui.js"></script>
+    <link rel="stylesheet" href="/css/user/chat.css">
+    <script src="/js/user/chat_service.js"></script>
+</head>
+
+<body>
+    <!-- 页头 start -->
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header" id="myhead">
+        </div>
+    </div>
+    <script src="/js/user/user_status.js"></script>
+    <script src="/js/header.js"></script>
+    <!-- 页头 end -->
+
+    <div class="layui-container">
+        <div class="layui-row chat_box">
+            <div class="layui-col-md3 layui-col-sm2 layui-col-xs2 user_list_box" id="user_list_box">
+
+            </div>
+
+            <div class="layui-col-md8 layui-col-sm8 layui-col-xs8">
+                <div class="layui-row">
+                    <div class="layui-col-md12 up_box layui-clear">
+                        <div class="chat_head">我是客服</div>
+                        <div class="content_history layui-clear" id="content_history">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-row">
+                    <div class="layui-col-md12 down_box">
+                        <div class="toolbar">
+                            <span>
+                                <button class="my_btn" id="get_file_btn"><i
+                                        class="layui-icon layui-icon-file"></i></button>
+                                <input type="file" name="get_file" style="display:none;" id="get_file">
+                            </span>
+                        </div>
+                        <textarea name="msg_input" id="msg_input" class="layui-textarea msg_input"
+                            placeholder="请输入"></textarea>
+                        <div class="send_bar layui-clear">
+                            <button class="layui-btn layui-btn-sm send_btn" id="send_btn">发送</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -29,9 +29,12 @@
     <div class="layui-container">
         <div class="layui-row">
 
-            <div class="layui-col-md2">
-                <ul class="machine_list" id="machine_list">                    
+            <div class="layui-col-md2 machine_list">
+                <ul id="machine_list">                    
                 </ul>
+                <div class="machine_add">
+                    <a class="layui-btn layui-btn-normal layui-btn-xs" href="/machine/bind.html">+ 添加设备 </a>
+                </div>
             </div>
 
             <div class="layui-col-md10 data_field">
@@ -41,7 +44,7 @@
                         ✨左侧列表查看您绑定的设备，点击后查看或控制您的设备
                     </div>
                 </fieldset>
-                <iframe src="" frameborder="0" class="machine_data" id="machine_data_iframe"></iframe>
+                <iframe src="/machine/iframe/default.html" frameborder="0" class="machine_data" id="machine_data_iframe"></iframe>
             </div>
 
         </div>

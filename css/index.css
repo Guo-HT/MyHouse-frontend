@@ -48,3 +48,35 @@
     margin:9px;
     float:right
 }
+
+.data_li{
+    height:40px;
+    line-height:40px;
+    width:100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border-bottom: 1px rgb(230, 225, 225) solid;
+}
+.data_li:last-child{
+    border-bottom: none;
+}
+.data_li img{
+    display:inline-block;
+    height:30px;
+    width:30px;
+    margin-right:10px;
+    vertical-align: middle;
+}
+
+.data_li .label{
+    color:orangered;
+    font-weight: 600;
+}
+
+.data_li .data{
+    font-weight: 600;
+}
+.data_li .time{
+    color:rgb(184, 175, 175)
+}
