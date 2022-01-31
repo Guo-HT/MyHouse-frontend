@@ -1,12 +1,12 @@
 $(function () {
     var img_type = ["png", "jpg", "jpeg", "gif", "tiff"];
-    var Service_id = "3";
+    var Service_id = "1";
 
     layui.use("layer", function () {
         var layer = layui.layer;
     })
-    var ws;
-    if ($.cookie("is_login") == 'false' || $.cookie("is_login") === undefined) {
+    var ws="";
+    if ($.cookie("is_login") == 'false' || $.cookie("is_login") === undefined || $.cookie("user_type")!="user") {
         location.href = "/user/login.html";
     }
     ws = new WebSocket("ws://127.0.0.1:8000/data/wstest/");
@@ -29,11 +29,10 @@ $(function () {
                 new_content += content[i];
             }
         }
-        var date = new Date();
         var oSendContent = {
             text: new_content,  // 内容
             to: Service_id,  // 给客服发送
-            time: date.getTime(),  // 时间戳
+            time: moment().format('YYYY-MM-DD hh:mm:ss.SSS'),  // 时间戳
             type: "text",
         };
         ws.send(JSON.stringify(oSendContent));  // 发送
@@ -65,12 +64,12 @@ $(function () {
             var file_name = content.split("/upload_files/chat_file/")[1];
             var html = '<div class="msg_box layui-clear"><div class="recv">' +
             '<img src="' + app_root + media_url + head + '" alt="" class="user_head"><div class="content">' +
-            '<a href="' + content + '" target="_blank">' + file_name + '</a></div></div></div>';
+            '<a href="' + app_root + content + '" target="_blank">' + file_name + '</a></div></div></div>';
         }else if(type=="image"){
             var file_name = content.split("/upload_files/chat_file/")[1];
             var html = '<div class="msg_box layui-clear"><div class="recv">' +
             '<img src="' + app_root + media_url + head + '" alt="" class="user_head"><div class="content">' +
-            '<a href="'+content+'" target="_blank"><img src="' + content + '" target="_blank" alt="'+file_name+'" width="50" height="50" /></a></div></div></div>';
+            '<a href="'+app_root + content+'" target="_blank"><img src="' + app_root + content + '" target="_blank" alt="'+file_name+'" width="50" height="50" /></a></div></div></div>';
         }
         $("#content_history").append(html);
         $("#content_history").children(":last").get(0).scrollIntoView(false);
@@ -85,15 +84,13 @@ $(function () {
         var file = this.files[0];
         var file_split = file.name.split(".")
         var file_type = file_split[file_split.length-1];
-        console.log(file_type);
         if (img_type.indexOf(file_type)!=-1){
             var type = "image";
         }
         else{
             var type = "file"
         }
-        var date = new Date()
-        var time = date.getTime();
+        var time = moment().format('YYYY-MM-DD hh:mm:ss.SSS');
         var formData = new FormData();
 
         formData.append("chat_file", file);
@@ -113,7 +110,7 @@ $(function () {
             },
             crossDomain: true,
         }).done(function (msg) {
-            console.log(msg);
+            // console.log(msg);
             if (msg.state == "ok") {
                 var file_name = msg.msg.file_name;
                 var from_id = msg.msg.from_id;
@@ -121,9 +118,7 @@ $(function () {
                 var text = msg.msg.text;
                 var time = msg.msg.time;
                 var to = msg.msg.to;
-
                 var new_content = "";
-
                 for (var i = 0; i < file_name.length; i++) {
                     if (file_name[i] == "\n" || file_name[i] == "\r" || file_name[i] == "\b" || file_name[i] == "\v" || file_name[i] == "\t") {
                         console.log(file_name[i])
@@ -135,11 +130,11 @@ $(function () {
                 if(type=="file"){
                     var html = '<div class="msg_box layui-clear"><div class="send">' +
                     '<img src="' + $("#header_head_photo").attr("src") + '" alt="" class="user_head"><div class="content">' +
-                    '<a href="' + text + '" target="_blank">' + new_content + '</a></div></div></div>';
+                    '<a href="' + app_root + text + '" target="_blank">' + new_content + '</a></div></div></div>';
                 }else if(type=="image"){
                     var html = '<div class="msg_box layui-clear"><div class="send">' +
                     '<img src="' + $("#header_head_photo").attr("src") + '" alt="" class="user_head"><div class="content">' +
-                    '<a href="'+text+'" target="_blank"><img src="' + text + '" target="_blank" alt="'+new_content+'" width="50" height="50" /></a></div></div></div>';
+                    '<a href="'+app_root +text+'" target="_blank"><img src="' + app_root + text + '" target="_blank" alt="'+new_content+'" width="50" height="50" /></a></div></div></div>';
                 }
 
                 $("#content_history").append(html);
@@ -153,5 +148,66 @@ $(function () {
     })
 
 
+    $.ajax({
+        url:app_root + "/data/get_chat_history",
+        type: 'get',
+        dataType:'json',
+        xhrFields: {
+            withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
+        },
+        crossDomain: true,
+    }).done(function(msg){
+        console.log(msg);
+        if(msg.state=="ok"){
+            var data = msg.msg;
+
+                var html_content_list = "";
+                for(var i=data.length-1; i>=0; i--){
+                    var this_data = data[i];
+                    console.log(this_data);
+                    if (this_data.content_type=="text"){  // 如果消息为文本
+                        if(this_data.type=="recv"){
+                            var html_content_list = html_content_list + '<div class="msg_box layui-clear"><div class="recv">' +
+                            '<img src="/img/default-head.png" alt="" class="user_head"><div class="content">' +
+                            this_data.content + '</div></div></div>';
+                        }else if(this_data.type=="send"){
+                            var html_content_list = html_content_list + '<div class="msg_box layui-clear"><div class="send">' +
+                            '<img src="' + app_root + this_data.media_url + this_data.head + '" alt="" class="user_head"><div class="content">' +
+                            this_data.content + '</div></div></div>';
+                        }
+                    }
+                    else if(this_data.content_type=="file"){  // 如果消息为文件
+                        var file_name = this_data.content.split("/upload_files/chat_file/")[1];
+                        if(this_data.type=="recv"){
+                            var html_content_list = html_content_list + '<div class="msg_box layui-clear"><div class="recv">' +
+                            '<img src="/img/default-head.png" alt="" class="user_head"><div class="content">' +
+                            '<a href="' + app_root+this_data.content + '" target="_blank">' + file_name + '</a></div></div></div>';
+                        }else if(this_data.type=="send"){
+                            var html_content_list = html_content_list + '<div class="msg_box layui-clear"><div class="send">' +
+                            '<img src="' + app_root + this_data.media_url + this_data.head + '" alt="" class="user_head"><div class="content">' +
+                            '<a href="' + app_root+this_data.content + '" target="_blank">' + file_name + '</a></div></div></div>';
+                        }
+                    }  
+                    else if(this_data.content_type=="image"){
+                        var file_name = this_data.content.split("/upload_files/chat_file/")[1];
+                        if(this_data.type=="recv"){
+                            var html_content_list = html_content_list + '<div class="msg_box layui-clear"><div class="recv">' +
+                            '<img src="/img/default-head.png" alt="" class="user_head"><div class="content">' +
+                            '<a href="' + app_root+this_data.content + '" target="_blank"><img src="' + app_root+this_data.content + '" target="_blank" alt="'+file_name+'" width="50" height="50" /></a></div></div></div>';
+                        }else if(this_data.type=="send"){
+                            var html_content_list = html_content_list + '<div class="msg_box layui-clear"><div class="send">' +
+                            '<img src="' + app_root + this_data.media_url + this_data.head + '" alt="" class="user_head"><div class="content">' +
+                            '<a href="' + app_root+this_data.content + '" target="_blank"><img src="' + app_root+this_data.content + '" target="_blank" alt="'+file_name+'" width="50" height="50" /></a></div></div></div>';
+                        }
+                    }
+                }
+            }
+            $("#content_history").html(html_content_list);
+            $("#content_history").children(":last").get(0).scrollIntoView(false);
+
+        
+    }).fail(function(e){
+        console.log(e);
+    })
 
 })

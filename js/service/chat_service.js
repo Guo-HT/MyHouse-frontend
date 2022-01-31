@@ -6,8 +6,8 @@ $(function(){
     var ws;
     
     // 判断是不是登录，如果没有登录，先去登录
-    if ($.cookie("is_login") == 'false' || $.cookie("is_login") === undefined) {
-        location.href = "/user/login.html";
+    if ($.cookie("is_login") == 'false' || $.cookie("is_login") === undefined || $.cookie("user_type")!="service") {
+        location.href = "/service/login.html";
     }
     // 建立ws连接
     ws = new WebSocket("ws://127.0.0.1:8000/data/wstest/");
@@ -25,26 +25,26 @@ $(function(){
         var from_id = data.id;
         var head = data.head;
         var time = data.time;
-        time = getLocalTime(time).split(" ")[1];
-        console.log(time);
+        time = time.split(" ")[1].slice(0, 8);
+        // console.log(time);
         var content = data.content;
         var media_url = data.media_url;
         var type = data.type;
 
         if (type=="text"){  // 如果消息为文本
             var html_content_list = '<div class="msg_box layui-clear"><div class="recv">' +
-            '<img src="' + app_root + media_url + head + '" alt="" class="user_head"><div class="content">' +
+            '<img src="'+app_root+media_url+head+'" alt="" class="user_head"><div class="content">' +
             content + '</div></div></div>';
         }else if(type=="file"){  // 如果消息为文件
             var file_name = content.split("/upload_files/chat_file/")[1];
             var html_content_list = '<div class="msg_box layui-clear"><div class="recv">' +
-            '<img src="' + app_root + media_url + head + '" alt="" class="user_head"><div class="content">' +
-            '<a href="' + content + '" target="_blank">' + file_name + '</a></div></div></div>';
+            '<img src="'+app_root+media_url+head+'" alt="" class="user_head"><div class="content">' +
+            '<a href="' + app_root+content + '" target="_blank">' + file_name + '</a></div></div></div>';
         }else if(type=="image"){
             var file_name = content.split("/upload_files/chat_file/")[1];
             var html_content_list = '<div class="msg_box layui-clear"><div class="recv">' +
-            '<img src="' + app_root + media_url + head + '" alt="" class="user_head"><div class="content">' +
-            '<a href="' + content + '" target="_blank"><img src="' + content + '" target="_blank" alt="'+file_name+'" width="50" height="50" /></a></div></div></div>';
+            '<img src="'+app_root+media_url+head+'" alt="" class="user_head"><div class="content">' +
+            '<a href="' + app_root+content + '" target="_blank"><img src="' + app_root+content + '" target="_blank" alt="'+file_name+'" width="50" height="50" /></a></div></div></div>';
         }
         // 左侧用户列表
         var html_user_list = '<div class="user_li layui-clear" id="'+from_id+'"><img src="' + app_root + media_url + head + '" alt="">'+
@@ -95,17 +95,16 @@ $(function(){
             return ;
         }
 
-        var date = new Date();
         var oSendContent = {
             text: new_content,  // 内容
             to: repeat_user_id,  // 给客服发送
-            time: date.getTime(),  // 时间戳
+            time: moment().format('YYYY-MM-DD hh:mm:ss.SSS'),  // 时间戳
             type: "text",
         };
         ws.send(JSON.stringify(oSendContent));  // 发送
         $("#msg_input").val("");
         var html = '<div class="msg_box layui-clear"><div class="send">' +
-            '<img src="'+$("#header_head_photo").attr("src")+'" alt="" class="user_head"><div class="content">' +
+            '<img src="/img/default-head.png" alt="" class="user_head"><div class="content">' +
             new_content + '</div></div></div>';
         $("#chat"+repeat_user_id).append(html);
         $("#chat"+repeat_user_id).children(":last").get(0).scrollIntoView(false);
@@ -113,22 +112,16 @@ $(function(){
 
     // 点击左侧用户列表，选择用户
     $("#user_list_box").on("click", ".user_li", function(){
-        console.log("点击，显示");
         $("#chat"+$(this).attr("id")).addClass("chat_show").siblings().removeClass("chat_show");
         $(this).addClass("this_user").siblings().removeClass("this_user");
     })
-
-
-    // 时间戳转时间字符串
-    function getLocalTime(nS) {    
-        return new Date(parseInt(nS) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');    
-    }
 
     // 获取文件
     $("#get_file_btn").click(function () {
         $("#get_file").click();
     })
 
+    // 发送文件
     $("#get_file").change(function () {
         var repeat_user_id = $(".this_user").attr("id");
         if(repeat_user_id===undefined){
@@ -145,8 +138,7 @@ $(function(){
         else{
             var type = "file"
         }
-        var date = new Date()
-        var time = date.getTime();
+        var time = moment().format('YYYY-MM-DD hh:mm:ss.SSS');
         var formData = new FormData();  // 构造表单数据对象
 
         formData.append("chat_file", file);  // 添加表单数据
@@ -167,7 +159,7 @@ $(function(){
             },
             crossDomain: true,
         }).done(function (msg) {
-            console.log(msg);
+            // console.log(msg);
             if (msg.state == "ok") {
                 var file_name = msg.msg.file_name;
                 var from_id = msg.msg.from_id;
@@ -186,12 +178,12 @@ $(function(){
                 }
                 if(type=="file"){
                     var html = '<div class="msg_box layui-clear"><div class="send">' +
-                    '<img src="' + $("#header_head_photo").attr("src") + '" alt="" class="user_head"><div class="content">' +
-                    '<a href="' + text + '" target="_blank">' + new_content + '</a></div></div></div>';
+                    '<img src="/img/default-head.png" alt="" class="user_head"><div class="content">' +
+                    '<a href="' + app_root+text + '" target="_blank">' + new_content + '</a></div></div></div>';
                 }else if(type=="image"){
                     var html = '<div class="msg_box layui-clear"><div class="send">' +
-                    '<img src="' + $("#header_head_photo").attr("src") + '" alt="" class="user_head"><div class="content">' +
-                    '<a href="'+text+'" target="_blank"><img src="' + text + '" target="_blank" alt="'+new_content+'" width="50" height="50" /></a></div></div></div>';
+                    '<img src="/img/default-head.png" alt="" class="user_head"><div class="content">' +
+                    '<a href="'+app_root+text+'" target="_blank"><img src="' + app_root+text + '" target="_blank" alt="'+new_content+'" width="50" height="50" /></a></div></div></div>';
                 }
                 $("#chat"+repeat_user_id).append(html);
                 $("#chat"+repeat_user_id).children(":last").get(0).scrollIntoView(false);
@@ -200,4 +192,101 @@ $(function(){
             console.log(e);
         })
     })
+
+    // 用户登出
+    $("#logout").click(function () {
+        layer.confirm('真的要退出登录吗?', { icon: 3, title: '退出登录', btn: ["取消", "退出"] }, function (index) {
+            console.log("1")
+            layer.close(index);
+            return false;
+        }, function (index) {
+            $.ajax({
+                url: app_root + "/user/service_log",
+                type: "get",
+                xhrFields: {
+                    withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
+                },
+                crossDomain: true,
+            }).done(function (msg) {
+                console.log(msg);
+                if (msg.state == "ok") {
+                    location.reload();
+                    // layer.msg("已退出登录");
+                }
+            }).fail(function (e) {
+                console.log(e);
+            })
+        })
+    })
+
+    $.ajax({
+        url:app_root + "/data/get_chat_history",
+        type: 'get',
+        dataType:'json',
+        xhrFields: {
+            withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
+        },
+        crossDomain: true,
+    }).done(function(msg){
+        console.log(msg);
+        if(msg.state=="ok"){
+            var data = msg.msg;
+            var html_user_list = '';
+            var html_content_list_all = "";
+            for(var key in data){
+                // console.log(key, data[key]);
+                
+                var html_user_list = html_user_list + '<div class="user_li layui-clear" id="'+key+'"><img src="' + app_root + data[key].media_url +data[key].head + '" alt="">'+
+                '<div class="user_name">'+data[key].name+'</div><div class="last_time">'+data[key]["his"][0].time.split(" ")[1].slice(0, 8)+'</div><div class="pre_content">'+data[key]["his"][0].content.slice(0, 10)+'</div></div>';
+                
+                var html_content_list = "";
+                for(var i=data[key]["his"].length-1; i>=0; i--){
+
+                    var this_data = data[key]["his"][i];
+
+                    if (this_data.content_type=="text"){  // 如果消息为文本
+                        if(this_data.type=="recv"){
+                            var html_content_list = html_content_list + '<div class="msg_box layui-clear"><div class="recv">' +
+                            '<img src="'+app_root + data[key].media_url +data[key].head+'" alt="" class="user_head"><div class="content">' +
+                            this_data.content + '</div></div></div>';
+                        }else if(this_data.type=="send"){
+                            var html_content_list = html_content_list + '<div class="msg_box layui-clear"><div class="send">' +
+                            '<img src="/img/default-head.png" alt="" class="user_head"><div class="content">' +
+                            this_data.content + '</div></div></div>';
+                        }
+                    }
+                    else if(this_data.content_type=="file"){  // 如果消息为文件
+                        var file_name = this_data.content.split("/upload_files/chat_file/")[1];
+                        if(this_data.type=="recv"){
+                            var html_content_list = html_content_list + '<div class="msg_box layui-clear"><div class="recv">' +
+                            '<img src="'+app_root + data[key].media_url +data[key].head+'" alt="" class="user_head"><div class="content">' +
+                            '<a href="' + app_root+this_data.content + '" target="_blank">' + file_name + '</a></div></div></div>';
+                        }else if(this_data.type=="send"){
+                            var html_content_list = html_content_list + '<div class="msg_box layui-clear"><div class="send">' +
+                            '<img src="/img/default-head.png" alt="" class="user_head"><div class="content">' +
+                            '<a href="' + app_root+this_data.content + '" target="_blank">' + file_name + '</a></div></div></div>';
+                        }
+                    }  
+                    else if(this_data.content_type=="image"){
+                        var file_name = this_data.content.split("/upload_files/chat_file/")[1];
+                        if(this_data.type=="recv"){
+                            var html_content_list = html_content_list + '<div class="msg_box layui-clear"><div class="recv">' +
+                            '<img src="'+app_root + data[key].media_url +data[key].head+'" alt="" class="user_head"><div class="content">' +
+                            '<a href="' + app_root+this_data.content + '" target="_blank"><img src="' + app_root+this_data.content + '" target="_blank" alt="'+file_name+'" width="50" height="50" /></a></div></div></div>';
+                        }else if(this_data.type=="send"){
+                            var html_content_list = html_content_list + '<div class="msg_box layui-clear"><div class="send">' +
+                            '<img src="/img/default-head.png" alt="" class="user_head"><div class="content">' +
+                            '<a href="' + app_root+this_data.content + '" target="_blank"><img src="' + app_root+this_data.content + '" target="_blank" alt="'+file_name+'" width="50" height="50" /></a></div></div></div>';
+                        }
+                    }
+                }
+                html_content_list_all = html_content_list_all + "<div class=\"chat_person\" id=\"chat"+key+"\">" + html_content_list + "</div>"
+            }
+            $("#content_history").html(html_content_list_all)
+            $("#user_list_box").html(html_user_list);
+        }
+    }).fail(function(e){
+        console.log(e);
+    })
+
 })

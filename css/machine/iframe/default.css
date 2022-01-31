@@ -1,0 +1,15 @@
+body{
+    width:100vw;
+    overflow: hidden;
+    /* display:flex;
+    align-content: space-around;
+    flex-wrap: wrap;
+    flex-direction: row; */
+    padding-top:30vh;
+}
+.box{
+    margin: 0 auto;
+}
+.box li{
+    line-height:32px;
+}

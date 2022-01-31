@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>客服登录</title>
+    <script src="/js/backend_url.js"></script>
+    <script src="/js/jquery-1.12.4.min.js"></script>
+    <link rel="stylesheet" href="/layui-v2.5.7/css/layui.css">
+    <script src="/layui-v2.5.7/layui.js"></script>
+    <link rel="stylesheet" href="/css/user/login-register-forget.css">
+    <script src="/js/service/login.js"></script>
+    <link rel="stylesheet" href="/css/header.css">
+
+</head>
+
+<body>
+    <!-- 页头 start -->
+    <!-- <div class="layui-layout layui-layout-admin">
+        <div class="layui-header" id="myhead">
+        </div>
+    </div>
+    <script src="/js/user/user_status.js"></script>
+    <script src="/js/header.js"></script> -->
+    <!-- 页头 end -->
+    <div class="layui-container">
+        <div class="layui-row">
+            <div
+                class="layui-col-md6 layui-col-sm8 layui-col-xs10 layui-col-md-offset3 layui-col-sm-offset2 layui-col-xs-offset1">
+                <form class="layui-form user-form">
+                    <h2>客服登录</h2>
+                    <hr>
+                    <!-- 用户名 start -->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户名/邮箱</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="user-name" required lay-verify="required" placeholder="用户名/邮箱"
+                                autocomplete="off" class="layui-input" id="user-name">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux tip" id="tip-user-name"></div>
+                    </div>
+                    <!-- 密码框 start -->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">密&nbsp;&nbsp;&nbsp;&nbsp;码</label>
+                        <div class="layui-input-block">
+                            <input type="password" name="password" required lay-verify="required" placeholder="请输入密码"
+                                autocomplete="off" class="layui-input" id="user-password">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux tip" id="tip-password"></div>
+                    </div>
+                    <!-- 记住我 start -->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">记住我</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" name="is-remember" lay-skin="primary" id="is-remember" checked>
+                        </div>
+                    </div>
+                    <!-- 按钮 start -->
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button type="button" class="layui-btn" id="submit">立即登录</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        //Demo
+        layui.use('form', function () {
+            var form = layui.form;
+            // //监听提交
+            // form.on('submit(*)', function (data) {
+            //     // layer.msg(JSON.stringify(data.field));
+            //     // return false;
+            // });
+        });
+    </script>
+
+</body>
+
+</html>
