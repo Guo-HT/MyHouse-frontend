@@ -1,4 +1,4 @@
-$(function(){
+$(function () {
     $("#user-password").blur(function () {
         var reg = /^\w+$/;
         if ((!reg.test($("#user-password").val()))||($("#user-password").val().length < 6)) {
@@ -15,6 +15,7 @@ $(function(){
         layui.use('layer', function () {
             var layer = layui.layer;
         });
+        // console.log(get_csrf_token());
         var user_name = $("#user-name").val();
         var user_password = $("#user-password").val();
         var is_remember = $("#is-remember").is(":checked");
@@ -31,6 +32,7 @@ $(function(){
             layer.msg("请填写信息");
             return;
         }
+        $.cookie("csrftoken", get_csrf_token());
         $.ajax({
             url:app_root+"/user/service_log",
             type:"post",
@@ -44,9 +46,11 @@ $(function(){
                 withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
             },
             crossDomain: true,
-            contentType: "application/x-www-form-urlencoded", // 不要动这里！动者死！
+            // contentType: "application/x-www-form-urlencoded", // 不要动这里！动者死！
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },
         }).done(function(msg){
-            console.log(msg);
             if(msg.state=="ok"){
                 location.href = "/service/chat_service.html";
             }
@@ -57,5 +61,4 @@ $(function(){
             layer.msg("登录失败！请稍后重试");
         })
     })
-
 })

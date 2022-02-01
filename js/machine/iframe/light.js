@@ -1,7 +1,6 @@
 $(function () {
     layui.use("layer", function () {
         const layer = layui.layer;
-
         var paramsStr = window.location.search
         var params = new URLSearchParams(paramsStr)
         var id = params.get('id') // list
@@ -13,7 +12,6 @@ $(function () {
             ;
         }
     })
-
 
     function get_data() {
         var paramsStr = window.location.search
@@ -32,6 +30,9 @@ $(function () {
                 withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
             },
             crossDomain: true,
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },
         }).done(function (msg) {
             console.log(msg);
             if (msg.state == "ok") {
@@ -76,6 +77,9 @@ $(function () {
                 withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
             },
             crossDomain: true,
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },
         }).done(function (msg) {
             console.log(msg);
             if (msg.state == "ok") {
@@ -90,7 +94,7 @@ $(function () {
                 $("#data_history").html(html);
             }
         }).fail(function (e) {
-
+            console.log(e);
         })
     }
     get_command_history();
@@ -116,6 +120,9 @@ $(function () {
                 withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
             },
             crossDomain: true,
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },
         }).done(function (msg) {
             // console.log(msg);
             if (msg.state == "ok") {
@@ -137,5 +144,4 @@ $(function () {
             console.log(e);
         })
     })
-
 })

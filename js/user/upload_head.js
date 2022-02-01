@@ -11,6 +11,9 @@ $(function () {
             xhrFields: {
                 withCredentials: true
             },
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },
         });
 
         //执行实例

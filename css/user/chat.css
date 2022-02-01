@@ -203,3 +203,14 @@
 .content_history a{
     color:blue;
 }
+
+.service_logout{
+    position:fixed;
+    right:10px;
+    bottom: 10px;
+    height:60px;
+    width:60px;
+    border-radius: 30px;
+    background-color: #1E9FFF;
+    color:white;
+}

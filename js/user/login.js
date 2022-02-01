@@ -26,6 +26,7 @@ $(function () {
         layui.use('layer', function () {
             var layer = layui.layer;
         });
+        // console.log(get_csrf_token());
         var user_name = $("#user-name").val();
         var user_password = $("#user-password").val();
         var is_remember = $("#is-remember").is(":checked");
@@ -56,6 +57,9 @@ $(function () {
             },
             crossDomain: true,
             contentType: "application/x-www-form-urlencoded", // 不要动这里！动者死！
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },
         }).done(function(msg){
             if(msg.state=="ok"){
                 location.href = "/index.html";
@@ -66,8 +70,5 @@ $(function () {
         }).fail(function(e){
             layer.msg("登录失败！请稍后重试");
         })
-
     })
-
-
 })

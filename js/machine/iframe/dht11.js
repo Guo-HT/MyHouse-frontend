@@ -187,6 +187,9 @@ $(function () {
                 withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
             },
             crossDomain: true,
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },
         }).done(function (msg) {
             console.log(msg);
             if (msg.state == "ok") {

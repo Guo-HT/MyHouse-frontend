@@ -14,8 +14,11 @@ $(function () {
         },
         crossDomain: true,
         contentType: "application/json",
+        headers: {
+            "X-CSRFToken": get_csrf_token(),
+        },
     }).done(function (msg) {
-        console.log(msg);
+        // console.log(msg);
         // {is_login: false, user_id: null, user_name: null}
         // {"is_login": true, "user_id": 3, "user_name": "guoht", "media_url": "/upload_files/", "head_photo": "head_photo/20220107163652938174.png"}
         setHeader(msg);
@@ -58,6 +61,9 @@ $(function () {
                     withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
                 },
                 crossDomain: true,
+                headers: {
+                    "X-CSRFToken": get_csrf_token(),
+                },
             }).done(function (msg) {
                 console.log(msg);
                 if (msg.state == "ok") {
@@ -87,6 +93,9 @@ $(function () {
                     withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
                 },
                 crossDomain: true,
+                headers: {
+                    "X-CSRFToken": get_csrf_token(),
+                },
                 // contentType: "application/x-www-form-urlencoded", // 不要动这里！动者死！
             }).done(function (msg) {
                 if (msg.state == "ok") {
@@ -96,7 +105,5 @@ $(function () {
                 console.log(e)
             })
         });
-
     })
-
 })

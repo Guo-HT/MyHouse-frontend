@@ -1,0 +1,18 @@
+.footer{
+    background-color: #23262E;
+    text-align: center;
+    color:#999999;
+    font-size: 12px;
+    padding: 10px;
+}
+
+.footer .line{
+    height:28px;
+    line-height:24px;
+    min-width: 800px;
+}
+
+.footer .line span{
+    padding: 0 10px;
+    color:#999999;
+}

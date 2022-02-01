@@ -1,13 +1,3 @@
-$.ajaxSetup({
-    headers: {
-        "X-CSRFToken": get_csrf_token(),
-    },
-    xhrFields: {
-        withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
-    },
-    crossDomain: true,
-})
-
 $(function(){
     layui.use("layer", function(){
         var layer = layui.layer;

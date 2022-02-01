@@ -3,11 +3,9 @@ $(function () {
         var element = layui.element;
         var layer = layui.layer;
     })
-
     if ($.cookie("is_login") == "false") {
         location.href = "/user/login.html";
     }
-
 
     // 点击卡片，输入框打开
     $(".my_card").click(function () {
@@ -57,6 +55,9 @@ $(function () {
                 withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
             },
             crossDomain: true,
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },
         }).done(function (msg) {
             if (msg.state == "ok") {
                 //显示自动关闭倒计秒数

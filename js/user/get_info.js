@@ -12,6 +12,9 @@ $(function () {
         },
         crossDomain: true,
         contentType: "application/json",
+        headers: {
+            "X-CSRFToken": get_csrf_token(),
+        },
     }).done(function (msg) {
         console.log(msg);
         if (msg.state == "ok") {
@@ -43,7 +46,10 @@ $(function () {
             data: {
                 page: page,
                 type: "history",
-            }
+            },
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },
         }).done(function (msg) {
             if (msg.state == "ok") {
                 layui.use('laypage', function () {
@@ -100,7 +106,10 @@ $(function () {
             data: {
                 page: page,
                 type: "collections",
-            }
+            },
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },
         }).done(function (msg) {
             if (msg.state == "ok") {
                 layui.use('laypage', function () {
@@ -144,7 +153,6 @@ $(function () {
 
     // 获取点赞 start
     function get_good(page) {
-
         $.ajax({
             url: app_root + "/essay/get_per_info_list",
             type: "get",
@@ -156,7 +164,10 @@ $(function () {
             data: {
                 page: page,
                 type: "good",
-            }
+            },
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },
         }).done(function (msg) {
             if (msg.state == "ok") {
                 layui.use('laypage', function () {
@@ -180,7 +191,6 @@ $(function () {
                         layout: ['prev', 'page', 'next'],
                     });
                 })
-
                 var html = "";
                 for (var i = 0; i < msg.msg.length; i++) {
                     html += '<a href="/org/essay.html?id=' + msg.msg[i].id + '" class="layui-col-md3 history_link">' +
@@ -198,7 +208,4 @@ $(function () {
 
     $("#good_switch").click(function () {get_good(1) })
     // 获取点赞 end
-
-
-
 })

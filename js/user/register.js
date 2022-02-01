@@ -58,6 +58,11 @@ $(function(){
             data:{
                 "email":email,
             },
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },xhrFields: {
+                withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
+            },crossDomain:true,
         }).done(function(msg){
             if(msg.state=="ok"){
                 layer.msg("邮件已发送，有效期5分钟");
@@ -98,7 +103,12 @@ $(function(){
                 passwd:passwd,
                 email:email,
                 verify:verify
-            }
+            },xhrFields: {
+                withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
+            },crossDomain: true,
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },
         }).done(function(msg){
             if(msg.state=="ok"){
                 layer.msg("注册成功");
@@ -112,6 +122,5 @@ $(function(){
             console.log(e)
             layer.msg("服务器出现错误，请稍后再试，或联系管理员")
         })
-
     })
 })

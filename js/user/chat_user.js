@@ -92,7 +92,6 @@ $(function () {
         }
         var time = moment().format('YYYY-MM-DD hh:mm:ss.SSS');
         var formData = new FormData();
-
         formData.append("chat_file", file);
         formData.append("time", time);
         formData.append("to", Service_id);
@@ -109,6 +108,9 @@ $(function () {
                 withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
             },
             crossDomain: true,
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },
         }).done(function (msg) {
             // console.log(msg);
             if (msg.state == "ok") {
@@ -136,17 +138,13 @@ $(function () {
                     '<img src="' + $("#header_head_photo").attr("src") + '" alt="" class="user_head"><div class="content">' +
                     '<a href="'+app_root +text+'" target="_blank"><img src="' + app_root + text + '" target="_blank" alt="'+new_content+'" width="50" height="50" /></a></div></div></div>';
                 }
-
                 $("#content_history").append(html);
                 $("#content_history").children(":last").get(0).scrollIntoView(false);
-
             }
         }).fail(function (e) {
             console.log(e);
         })
-
     })
-
 
     $.ajax({
         url:app_root + "/data/get_chat_history",
@@ -156,11 +154,13 @@ $(function () {
             withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
         },
         crossDomain: true,
+        headers: {
+            "X-CSRFToken": get_csrf_token(),
+        },
     }).done(function(msg){
         console.log(msg);
         if(msg.state=="ok"){
             var data = msg.msg;
-
                 var html_content_list = "";
                 for(var i=data.length-1; i>=0; i--){
                     var this_data = data[i];
@@ -204,10 +204,7 @@ $(function () {
             }
             $("#content_history").html(html_content_list);
             $("#content_history").children(":last").get(0).scrollIntoView(false);
-
-        
     }).fail(function(e){
         console.log(e);
     })
-
 })

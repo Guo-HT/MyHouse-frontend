@@ -1,12 +1,14 @@
 $(function () {
-
     $.ajax({
         url: app_root + "/essay/details",
         type: "get",
         dataType: "json",
         data: {
             list_for: "index",
-        }
+        },
+        headers: {
+            "X-CSRFToken": get_csrf_token(),
+        },
     }).done(function (msg) {
         if (msg.state == "ok") {
             var html = "";
@@ -38,8 +40,11 @@ $(function () {
                 withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
             },
             crossDomain: true,
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },
         }).done(function (msg) {
-            console.log(msg);
+            // console.log(msg);
             if (msg.state == "ok") {
                 var html = "";
                 if (msg.msg.length==0) {
@@ -47,18 +52,16 @@ $(function () {
                 }
                 else {
                     for (var i = 0; i < msg.msg.length; i++) {
-
                         if (msg.msg[i].work_type == "1") {
-                            console.log(html)
+                            // console.log(html)
                             html = html + '<li class="data_li"><div>' +
                                 '<img src="/img/' + WORK_TYPE[msg.msg[i].work_type] + '.jpg" alt="图片">' +
                                 '<span class="label">' + msg.msg[i].name + '</span>:&nbsp;&nbsp;' +
                                 '<span class="data">' + (msg.msg[i].last_data.LED_state == 0 ? "关闭" : "打开") + '</span>&nbsp;&nbsp;' +
                                 '<span class="time">' + msg.msg[i].last_data.time + '</span></div></li>'
                         }
-
                         else if (msg.msg[i].work_type == "2") {
-                            console.log(html)
+                            // console.log(html)
                             html = html + '<li class="data_li"><div>' +
                                 '<img src="/img/' + WORK_TYPE[msg.msg[i].work_type] + '.jpg" alt="图片">' +
                                 '<span class="label">' + msg.msg[i].name + '</span>:&nbsp;&nbsp;' +
@@ -66,7 +69,6 @@ $(function () {
                                 '<span class="data">' + msg.msg[i].last_data.humidity + '</span>%&nbsp;&nbsp;' +
                                 '<span class="time">' + msg.msg[i].last_data.time + '</span></div></li>'
                         }
-
                     }
                 }
                 $("#data_ul").html(html);
@@ -78,10 +80,4 @@ $(function () {
         })
     }
     get_machines_data();
-
-
-
-
-
-
 })

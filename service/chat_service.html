@@ -11,17 +11,6 @@
     <script src="/js/jquery.cookie.js"></script>
     <script src="/js/moment.js"></script>
     <script src="/js/csrf_token.js"></script>
-    <script>
-        $.ajaxSetup({
-            headers: {
-                "X-CSRFToken": get_csrf_token(),
-            },
-            xhrFields: {
-                withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
-            },
-            crossDomain: true,
-        })
-    </script>
     <link rel="stylesheet" href="/layui-v2.5.7/css/layui.css">
     <link rel="stylesheet" href="/css/header.css">
     <script src="/layui-v2.5.7/layui.js"></script>
@@ -29,8 +18,7 @@
     <script src="/js/service/chat_service.js"></script>
 </head>
 
-<body>
-
+<body style="min-width:700px;">
     <div class="layui-container">
         <div class="layui-row chat_box">
             <div class="layui-col-md3 layui-col-sm2 layui-col-xs2 user_list_box" id="user_list_box">
@@ -63,10 +51,9 @@
                     </div>
                 </div>
             </div>
-            <button id="logout">下班（退出登录）</button>
         </div>
     </div>
-
+    <button id="logout" class="service_logout">下班</button>
 </body>
 
 </html>

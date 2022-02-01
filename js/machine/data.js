@@ -8,6 +8,9 @@ $(function () {
                 withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
             },
             crossDomain: true,
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },
         }).done(function (msg) {
             // console.log(msg);
             if (msg.state == "ok") {
@@ -32,7 +35,6 @@ $(function () {
     }
     get_machine_list();
 
-
     function get_machine_status(){
         $.ajax({
             url:app_root + '/data/status',
@@ -42,6 +44,9 @@ $(function () {
                 withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
             },
             crossDomain: true,
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },
         }).done(function(msg){
             var data=msg.msg;
             // console.log(data);
@@ -55,23 +60,13 @@ $(function () {
         }).fail(function(e){
             console.log(e)
         })
-
     }
     get_machine_status();
     t_status = setInterval(get_machine_status, 10000);
-
 
     $("#machine_list").on("click", ".machine_li", function(){
         var machine_id = $(this).find(".machine_id").val();
         var work_type = $(this).find(".work_type").val();
         $("#machine_data_iframe").attr({"src": "/machine/iframe/"+WORK_TYPE[work_type]+".html?id="+machine_id+"&type="+work_type})
     })
-
-
-
-
-
-
-
-
 })
