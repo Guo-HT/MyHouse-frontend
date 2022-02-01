@@ -1,5 +1,4 @@
 $(function () {
-
     var paramsStr = window.location.search
     var params = new URLSearchParams(paramsStr)
     var page = params.get('p'); // list
@@ -10,7 +9,6 @@ $(function () {
     if (search_str){
         $("#search_str").text(search_str + "  的搜索结果：")
     }
-    
     $.ajax({
         url: app_root + "/essay/details",
         type: "get",
@@ -19,6 +17,9 @@ $(function () {
             list_for: "details",
             search: search_str,
             page: page,
+        },
+        headers: {
+            "X-CSRFToken": get_csrf_token(),
         },
     }).done(function (msg) {
         // console.log(msg.page_num);
@@ -61,7 +62,5 @@ $(function () {
     }).fail(function (e) {
         console.log(e);
     })
-
-
 })
 

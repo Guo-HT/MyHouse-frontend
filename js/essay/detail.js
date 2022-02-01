@@ -25,6 +25,9 @@ $(function () {
                 withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
             },
             crossDomain: true,
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },
         }).done(function (msg) {
             if(msg.state=="fail" && msg.msg=="jump to login"){
                 layer.msg("请登录");
@@ -59,6 +62,9 @@ $(function () {
                     withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。
                 },
                 crossDomain: true,
+                headers: {
+                    "X-CSRFToken": get_csrf_token(),
+                },
             }).done(function (msg) {
                 console.log(msg);
                 if(msg.state=="fail" && msg.msg=="jump to login"){
@@ -103,7 +109,10 @@ $(function () {
         dataType:"json",
         data:{
             list_for:"recent",
-        }
+        },
+        headers: {
+            "X-CSRFToken": get_csrf_token(),
+        },
     }).done(function(msg){
         if(msg.state=="ok"){
             // console.log(msg.msg);
@@ -128,7 +137,10 @@ $(function () {
         dataType:"json",
         data:{
             list_for:"hot",
-        }
+        },
+        headers: {
+            "X-CSRFToken": get_csrf_token(),
+        },
     }).done(function(msg){
         if(msg.state=="ok"){
             // console.log(msg.msg);

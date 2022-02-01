@@ -23,7 +23,7 @@ $(function () {
         }
         var new_content = "";
         for (var i = 0; i < content.length; i++) {
-            if (content[i] == "\n" || content[i] == "\r" || content[i] == "\a" || content[i] == "\b" || content[i] == "\v" || content[i] == "\t") {
+            if (content[i] == "\n" || content[i] == "\r" || content[i] == "\b" || content[i] == "\v" || content[i] == "\t") {
                 new_content += "<br>";
             } else {
                 new_content += content[i];

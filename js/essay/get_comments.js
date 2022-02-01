@@ -2,7 +2,6 @@ $(function () {
     layui.use("layer", function () {
         var layer = layui.layer;
     })
-
     var paramsStr = window.location.search
     var params = new URLSearchParams(paramsStr)
     var id = params.get('id')
@@ -16,12 +15,14 @@ $(function () {
             data: {
                 for: id,
                 page:page,
-            }
+            },
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },
         }).done(function (msg) {
             // console.log(msg);
             var html = "";
             if (msg.state == "ok") {
-    
                 layui.use('laypage', function () {
                     var laypage = layui.laypage;
                     //执行一个laypage实例
@@ -56,7 +57,6 @@ $(function () {
                         '<div class="layui-col-md1 layui-col-xs2"><button class="comment_reply_btn" id="comment_reply_btn">发布</button>' +
                         '</div></div></div></li>';
                     for (var j = 0; j < msg.msg[i].reply.length; j++) {
-    
                         html += '<li class="child"><div class="line1"><span class="head_span"><img src="' + app_root + msg.msg[i].upload_file + msg.msg[i].reply[j].head_path + '" alt=""></span>' +
                             '<span class="username_span">' + msg.msg[i].reply[j].user_name + '</span><span style="color:#AEAEAE;"> 回复 </span><span>' + msg.msg[i].reply[j].reply_to + '</span><span class="comment_time">' + msg.msg[i].reply[j].time + '</span><input type="hidden" value="'+msg.msg[i].reply[j].comment_id+'"></div>' +
                             '<div class="line2"><div class="comment_content">' + msg.msg[i].reply[j].comment + '</div></div>' +
@@ -69,7 +69,6 @@ $(function () {
                 }
                 // console.log(html);
                 $("#comment_list").html(html);
-    
             }
         })
     } 
@@ -100,6 +99,9 @@ $(function () {
                 withCredentials: true
             },
             crossDomain: true,
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },
         }).done(function (msg) {
             console.log(msg);
             if(msg.state=="fail" && msg.msg=="jump to login"){
@@ -131,14 +133,12 @@ $(function () {
     $("#comment_list").on("click", ".comment_reply_switch", function () {
         if ($(this).text() == "回复") {
             $(this).text("收起回复");
-        }
-        else if ($(this).text() == "收起回复") {
+        } else if ($(this).text() == "收起回复") {
             $(this).text("回复");
         }
         $(this).parent().parent().find(".line4").toggle();
     })
     // 点击回复 end
-
 
     // 发表回复 start
     $("#comment_list").on("click", "#comment_reply_btn", function () {
@@ -158,7 +158,6 @@ $(function () {
                 root = root.prev();
             }
         }
-        
         var root_id = root.find("input").val();
         var reply_id = $(this).parent().parent().parent().parent().find("input").val();
         var reply_type = $(this).parent().parent().parent().parent().attr("class");
@@ -178,6 +177,9 @@ $(function () {
                 withCredentials: true,
             },
             crossDomain: true,
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },
         }).done(function (msg) {
             console.log(msg);
             html = '<li class="child"><div class="line1"><span class="head_span"><img src="' + app_root + msg.msg.upload_file + msg.msg.head_path + '" alt=""></span>' +
@@ -192,10 +194,8 @@ $(function () {
         }).fail(function (e) {
             console.log(e);
         })
-
     })
     // 发表回复 end
-
 
     // 评论、回复点赞 start
     $("#comment_list").on("click", ".comment_good_icon", function(){
@@ -214,6 +214,9 @@ $(function () {
                 withCredentials:true,
             },
             crossDomain:true,
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },
         }).done(function(msg){
             // console.log(msg);
             if(msg.state=="ok"){
@@ -222,8 +225,6 @@ $(function () {
         }).fail(function(e){
             console.log(e);
         })
-
     })
     // 评论、回复点赞 end
-
 })
