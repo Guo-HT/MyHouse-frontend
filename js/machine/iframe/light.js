@@ -144,4 +144,9 @@ $(function () {
             console.log(e);
         })
     })
+
+
+    $("#data_history_click").click(function(){
+        $("#data_history").slideToggle(1000);
+    })
 })

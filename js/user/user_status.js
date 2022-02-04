@@ -87,7 +87,7 @@ $(function () {
             layer.msg("注销中");
             $.ajax({
                 url: app_root + "/user/reg",
-                type: "post",
+                type: "delete",
                 dataType: "json",
                 xhrFields: {
                     withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。

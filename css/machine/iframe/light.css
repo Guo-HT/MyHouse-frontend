@@ -38,3 +38,7 @@
 .cmd_on{
     background-color: rgb(162, 235, 235);
 }
+
+.data_history{
+    display:none;
+}

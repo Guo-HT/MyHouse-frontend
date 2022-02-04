@@ -1,0 +1,88 @@
+.layui-container{
+    padding-top: 16px;
+}
+
+.form_box{
+    margin:24px auto;
+}
+
+.form_box h3{
+    text-align: center;
+    margin:8px;
+}
+
+.upper_machine_box,
+.condition_box,
+.condition_num_box,
+.lower_machine_box,
+.command_box,
+.command_num_box {
+    padding: 6px;
+}
+
+.box_inner {
+    border: 1px solid #E6E6E6;
+}
+
+select {
+    height: 38px;
+    width: 100%;
+    color: #757575;
+    outline: none;
+    border: none;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: none;
+}
+
+.command_num_box input, .condition_num_box input{
+    height:40px;
+    width:100%;
+    line-height:40px
+}
+.link_icon{
+    display: block;
+    height:36px;
+    width:36px;
+    padding: 6px;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+.submit_btn{
+    display:block;
+    margin: 10px auto;
+}
+.link_list_ul{
+    width:100%;
+    display:block;
+}
+.link_list_li{
+    height:100px;
+    box-sizing: border-box;
+    padding:6px;
+    text-align: center;
+    color: #757575;
+}
+.link_list_content{
+    background-color: #F2F2F2;
+    padding:6px;
+    box-shadow: 1px 1px 4px rgb(0 0 0 / 8%);
+    border-color: #eee;
+    border-width: 1px;
+    border-style: solid;
+}
+.link_cut{
+    margin-top:10px;
+}
+.link_cut button{
+    display:block;
+    margin: 0 auto;
+}
+
+.machine_name_em{
+    color:#0000FF;
+}
+.page_nav{
+    text-align: center;
+}

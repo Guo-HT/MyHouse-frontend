@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>设备联动</title>
+    <script src="/js/backend_url.js"></script>
+    <script src="/js/jquery-1.12.4.min.js"></script>
+    <script src="/js/jquery.cookie.js"></script>
+    <script src="/js/csrf_token.js"></script>
+    <link rel="stylesheet" href="/layui-v2.5.7/css/layui.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/machine/link.css">
+    <script src="/layui-v2.5.7/layui.js"></script>
+    <script src="/js/machine/work_type.js"></script>
+    <script>
+        var form;
+        layui.use("form", function () {
+            var form = layui.form;
+            form.render();
+        })
+    </script>
+    <script src="/js/machine/link.js"></script>
+</head>
+<!-- html,css,javascript -->
+
+<body>
+    <!-- 页头 start -->
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header" id="myhead">
+        </div>
+    </div>
+    <script src="/js/user/user_status.js"></script>
+    <script src="/js/header.js"></script>
+    <!-- 页头 end -->
+
+    <div class="layui-container">
+        <fieldset class="layui-elem-field">
+            <legend>设备联动</legend>
+            <div class="layui-field-box">
+                1.选择触发设备并填写触发条件<br>
+                2.选择执行设备及操作
+            </div>
+        </fieldset>
+        <div class="layui-row">
+            <div class="layui-col-md12 layui-col-sm12 layui-col-xs12">
+                <form class="form_box">
+                    <div class="layui-col-md12 layui-col-sm12 layui-col-xs12">
+                        <h3>如果</h3>
+                    </div>
+                    <div class="layui-col-md4 layui-col-sm4 layui-col-xs4">
+                        <div class="upper_machine_box">
+                            <div class="box_inner">
+                                <select name="upper_machine" id="upper_machine">
+                                    <option value="">请选择一个触发设备</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md4 layui-col-sm4 layui-col-xs4">
+                        <div class="condition_box">
+                            <div class="box_inner">
+                                <select name="condition" id="condition">
+                                    <option value="">请选择触发条件</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md4 layui-col-sm4 layui-col-xs4">
+                        <div class="condition_num_box">
+                            <input type="text" class="layui-input" placeholder="触发条件" id="condition_num">
+                        </div>
+                    </div>
+                    <div class="layui-col-md12 layui-col-xs12 layui-col-sm12">
+                        <span class="link_icon"><svg t="1643899957320" class="icon" viewbox="0 0 1024 1024"
+                                version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2989" width="24" height="24">
+                                <path
+                                    d="M573.056 752l308.8-404.608A76.8 76.8 0 0 0 820.736 224H203.232a76.8 76.8 0 0 0-61.056 123.392l308.8 404.608a76.8 76.8 0 0 0 122.08 0z"
+                                    p-id="2990" fill="#8a8a8a"></path>
+                            </svg></span>
+                    </div>
+                    <div class="layui-col-md4 layui-col-sm4 layui-col-xs4">
+                        <div class="lower_machine_box">
+                            <div class="box_inner">
+                                <select name="lower_machine" id="lower_machine">
+                                    <option value="">请选择一个执行设备</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md4 layui-col-sm4 layui-col-xs4">
+                        <div class="command_box">
+                            <div class="box_inner">
+                                <select name="command" id="command">
+                                    <option value="">请选择执行动作</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md4 layui-col-sm4 layui-col-xs4">
+                        <div class="command_num_box">
+                            <input type="text" class="layui-input" placeholder="执行幅度" id="command_num">
+                        </div>
+                    </div>
+                </form>
+                <div class="layui-col-md12 layui-col-xs12 layui-col-sm12">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm submit_btn" id="submit_btn">提交</button>
+                </div>
+            </div>
+            <hr>
+            <div class="layui-row">
+                <div class="layui-col-md12 layui-col-xs12 layui-col-sm12">
+                    <ul id="link_list_ul">
+
+                    </ul>
+                </div>
+                <div class="page_nav" id="page_nav"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
