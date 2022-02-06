@@ -23,7 +23,7 @@ $(function(){
         // console.log(msg);
         if(msg.state=="ok"){
             var data = msg.msg;
-            $("#title").text(data.title);
+            $("#title").text(xss_defender(data.title));
             $("#upload_time").text(data.create_time);
             $("#upload_user").text(data.user);
             $("#good_num").text(data.good_num);

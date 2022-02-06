@@ -15,7 +15,7 @@ $(function () {
             for (var i = 0; i < msg.msg.length; i++) {
                 // console.log(msg.msg[i]);
                 html += "<li class=\"org_li\"><a href=\"/org/essay.html?id=" + msg.msg[i].id + "\" target=\"_blank\"><span class=\"org_li_title\">" + msg.msg[i].title + "</span>" +
-                    "<span class=\"org_li_content\">" + msg.msg[i].content + "</span>" +
+                    "<span class=\"org_li_content\">" + xss_defender(msg.msg[i].content) + "</span>" +
                     "<span class=\"layui-badge org_list_badge\">" + msg.msg[i].watch_num + "</span></a></li>";
             }
             $("#org_ul").html(html);
@@ -56,7 +56,7 @@ $(function () {
                             // console.log(html)
                             html = html + '<li class="data_li"><div>' +
                                 '<img src="/img/' + WORK_TYPE[msg.msg[i].work_type] + '.jpg" alt="图片">' +
-                                '<span class="label">' + msg.msg[i].name + '</span>:&nbsp;&nbsp;' +
+                                '<span class="label">' + xss_defender(msg.msg[i].name) + '</span>:&nbsp;&nbsp;' +
                                 '<span class="data">' + (msg.msg[i].last_data.LED_state == 0 ? "关闭" : "打开") + '</span>&nbsp;&nbsp;' +
                                 '<span class="time">' + msg.msg[i].last_data.time + '</span></div></li>'
                         }
@@ -64,7 +64,7 @@ $(function () {
                             // console.log(html)
                             html = html + '<li class="data_li"><div>' +
                                 '<img src="/img/' + WORK_TYPE[msg.msg[i].work_type] + '.jpg" alt="图片">' +
-                                '<span class="label">' + msg.msg[i].name + '</span>:&nbsp;&nbsp;' +
+                                '<span class="label">' + xss_defender(msg.msg[i].name) + '</span>:&nbsp;&nbsp;' +
                                 '<span class="data">' + msg.msg[i].last_data.temp + '</span>℃&nbsp;&nbsp;' +
                                 '<span class="data">' + msg.msg[i].last_data.humidity + '</span>%&nbsp;&nbsp;' +
                                 '<span class="time">' + msg.msg[i].last_data.time + '</span></div></li>'

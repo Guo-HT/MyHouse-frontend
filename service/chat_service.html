@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我是客服</title>
     <script src="/js/backend_url.js"></script>
+    <script src="/js/xss_defender.js"></script>
     <script src="/js/jquery-1.12.4.min.js"></script>
     <script src="/js/jquery.cookie.js"></script>
     <script src="/js/moment.js"></script>
@@ -19,6 +20,12 @@
 </head>
 
 <body style="min-width:700px;">
+    <!-- 页头 start -->
+    <ul class="layui-nav" lay-filter="">
+        <li class="layui-nav-item">MyHouse——智能家居&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+        <li class="layui-nav-item">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在线客服</li>
+    </ul>
+    <!-- 页头 end -->
     <div class="layui-container">
         <div class="layui-row chat_box">
             <div class="layui-col-md3 layui-col-sm2 layui-col-xs2 user_list_box" id="user_list_box">

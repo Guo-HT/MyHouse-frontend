@@ -30,7 +30,7 @@ $(function () {
             }
         }
         var oSendContent = {
-            text: new_content,  // 内容
+            text: xss_defender(new_content),  // 内容
             to: Service_id,  // 给客服发送
             time: moment().format('YYYY-MM-DD hh:mm:ss.SSS'),  // 时间戳
             type: "text",

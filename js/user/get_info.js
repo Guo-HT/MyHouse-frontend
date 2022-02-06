@@ -77,8 +77,8 @@ $(function () {
                 var html = "";
                 for (var i = 0; i < msg.msg.length; i++) {
                     html += '<a href="/org/essay.html?id=' + msg.msg[i].id + '" class="layui-col-md3 history_link">' +
-                        '<div class="layui-card"><div class="layui-card-header">' + msg.msg[i].title + '</div>' +
-                        '<div class="layui-card-body">' + msg.msg[i].content + '</div></div></a>';
+                        '<div class="layui-card"><div class="layui-card-header">' + xss_defender(msg.msg[i].title) + '</div>' +
+                        '<div class="layui-card-body">' + xss_defender(msg.msg[i].content) + '</div></div></a>';
                 }
                 console.log(html);
                 $("#history_content").html(html);
@@ -136,8 +136,8 @@ $(function () {
                 var html = "";
                 for (var i = 0; i < msg.msg.length; i++) {
                     html += '<a href="/org/essay.html?id=' + msg.msg[i].id + '" class="layui-col-md3 history_link">' +
-                        '<div class="layui-card"><div class="layui-card-header">' + msg.msg[i].title + '</div>' +
-                        '<div class="layui-card-body">' + msg.msg[i].content + '</div></div></a>';
+                        '<div class="layui-card"><div class="layui-card-header">' + xss_defender(msg.msg[i].title) + '</div>' +
+                        '<div class="layui-card-body">' + xss_defender(msg.msg[i].content) + '</div></div></a>';
                 }
                 console.log(html);
                 $("#collection_content").html(html);
@@ -194,8 +194,8 @@ $(function () {
                 var html = "";
                 for (var i = 0; i < msg.msg.length; i++) {
                     html += '<a href="/org/essay.html?id=' + msg.msg[i].id + '" class="layui-col-md3 history_link">' +
-                        '<div class="layui-card"><div class="layui-card-header">' + msg.msg[i].title + '</div>' +
-                        '<div class="layui-card-body">' + msg.msg[i].content + '</div></div></a>';
+                        '<div class="layui-card"><div class="layui-card-header">' + xss_defender(msg.msg[i].title) + '</div>' +
+                        '<div class="layui-card-body">' + xss_defender(msg.msg[i].content) + '</div></div></a>';
                 }
                 console.log(html);
                 $("#good_content").html(html);

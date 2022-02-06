@@ -202,8 +202,8 @@ $(function () {
                     html_li = html_li + '<li class="layui-col-md3 layui-col-sm4 layui-col-xs6 link_list_li">' +
                         '<input type="hidden" name="link_id" value="'+data.link_id+'" id="link_id"><input type="hidden" name="upper_id" value="'+data.upper_id+'" id="upper_id">' +
                         '<input type="hidden" name="lower_id" value="'+data.lower_id+'" id="lower_id"><div class="link_list_content"><div class="link_content">当' +
-                        '<span class="machine_name_em">'+data.upper_name+'</span>，<span>'+convert_data_item(data.data_item)+'</span><span>'+convert_logic(data.condition)+'</span><span>'+data.condition_num+'</span>时<br>' +
-                        '<span class="machine_name_em">'+data.lower_name+'</span><span>状态</span>置<span>'+data.command_num+'</span></div>' +
+                        '<span class="machine_name_em">'+xss_defender(data.upper_name)+'</span>，<span>'+convert_data_item(data.data_item)+'</span><span>'+convert_logic(data.condition)+'</span><span>'+data.condition_num+'</span>时<br>' +
+                        '<span class="machine_name_em">'+xss_defender(data.lower_name)+'</span><span>状态</span>置<span>'+data.command_num+'</span></div>' +
                         '<div class="link_cut"><button class="layui-btn layui-btn-xs" id="cut_link_btn">解除</button></div></div></li>';
                 }
                 $("#link_list_ul").html(html_li);

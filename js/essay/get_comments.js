@@ -49,7 +49,7 @@ $(function () {
                 for (var i = 0; i < msg.msg.length; i++) {
                     html += '<li class="root"><div class="line1"><span class="head_span"><img src="' + app_root + msg.msg[i].upload_file + msg.msg[i].head_path + '" alt=""></span>' +
                         '<span class="username_span">' + msg.msg[i].user_name + '</span><span class="comment_time">' + msg.msg[i].time + '</span><input type="hidden" value="'+msg.msg[i].comment_id+'"></div>' +
-                        '<div class="line2"><div class="comment_content">' + msg.msg[i].comment + '</div></div>' +
+                        '<div class="line2"><div class="comment_content">' + xss_defender(msg.msg[i].comment) + '</div></div>' +
                         '<div class="line3"><i class="layui-icon layui-icon-heart-fill comment_good_icon"></i>' +
                         '<span class="comment_good_num">' + msg.msg[i].good_num + '</span><span class="comment_reply_switch">回复</span></div>' +
                         '<div class="line4"><div class="layui-row"><div class="layui-col-md11 layui-col-xs10">' +
@@ -57,9 +57,10 @@ $(function () {
                         '<div class="layui-col-md1 layui-col-xs2"><button class="comment_reply_btn" id="comment_reply_btn">发布</button>' +
                         '</div></div></div></li>';
                     for (var j = 0; j < msg.msg[i].reply.length; j++) {
+                        console.log(xss_defender(msg.msg[i].reply[j].comment));
                         html += '<li class="child"><div class="line1"><span class="head_span"><img src="' + app_root + msg.msg[i].upload_file + msg.msg[i].reply[j].head_path + '" alt=""></span>' +
                             '<span class="username_span">' + msg.msg[i].reply[j].user_name + '</span><span style="color:#AEAEAE;"> 回复 </span><span>' + msg.msg[i].reply[j].reply_to + '</span><span class="comment_time">' + msg.msg[i].reply[j].time + '</span><input type="hidden" value="'+msg.msg[i].reply[j].comment_id+'"></div>' +
-                            '<div class="line2"><div class="comment_content">' + msg.msg[i].reply[j].comment + '</div></div>' +
+                            '<div class="line2"><div class="comment_content">' + xss_defender(msg.msg[i].reply[j].comment) + '</div></div>' +
                             '<div class="line3"><i class="layui-icon layui-icon-heart-fill comment_good_icon"></i>' +
                             '<span class="comment_good_num">' + msg.msg[i].reply[j].good_num + '</span><span class="comment_reply_switch">回复</span></div>' +
                             '<div class="line4"><div class="layui-row"><div class="layui-col-md11 layui-col-xs10">' +
@@ -113,7 +114,7 @@ $(function () {
                 // 回显
                 var html = '<li class="root"><div class="line1"><span class="head_span"><img src="' + app_root + msg.msg.upload_file + msg.msg.head_path + '" alt=""></span>' +
                     '<span class="username_span">' + msg.msg.user_name + '</span><span class="comment_time">' + msg.msg.time + '</span><input type="hidden" value="'+msg.msg.comment_id+'"></div>' +
-                    '<div class="line2"><div class="comment_content">' + msg.msg.comment + '</div></div>' +
+                    '<div class="line2"><div class="comment_content">' + xss_defender(msg.msg.comment) + '</div></div>' +
                     '<div class="line3"><i class="layui-icon layui-icon-heart-fill comment_good_icon"></i>' +
                     '<span class="comment_good_num">' + msg.msg.good_num + '</span>' +
                     '<span class="comment_reply_switch">回复</span></div>' +
@@ -184,7 +185,7 @@ $(function () {
             console.log(msg);
             html = '<li class="child"><div class="line1"><span class="head_span"><img src="' + app_root + msg.msg.upload_file + msg.msg.head_path + '" alt=""></span>' +
                 '<span class="username_span">' + msg.msg.user_name + '</span><span style="color:#AEAEAE;"> 回复 </span><span>' + msg.msg.reply_to + '</span><span class="comment_time">' + msg.msg.time + '</span><input type="hidden" value="'+msg.msg.comment_id+'"></div>' +
-                '<div class="line2"><div class="comment_content">' + msg.msg.comment + '</div></div><div class="line3"><i class="layui-icon layui-icon-heart-fill comment_good_icon"></i>' +
+                '<div class="line2"><div class="comment_content">' + xss_defender(msg.msg.comment) + '</div></div><div class="line3"><i class="layui-icon layui-icon-heart-fill comment_good_icon"></i>' +
                 '<span class="comment_good_num">' + msg.msg.good_num + '</span><span class="comment_reply_switch">回复</span></div><div class="line4"><div class="layui-row"><div class="layui-col-md11 layui-col-xs10">' +
                 '<input type="text" id="comment_reply" class="comment_reply" placeholder="回复"></div>' +
                 '<div class="layui-col-md1 layui-col-xs2"><button class="comment_reply_btn" id="comment_reply_btn">发布</button></div></div></div></li>'

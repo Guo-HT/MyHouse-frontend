@@ -48,8 +48,8 @@ $(function () {
         if (msg.state == "ok") {
             for (var i = 0; i < msg.msg.length; i++) {
                 html += "<li class=\"list_body_li layui-clear\"><a href=\"/org/essay.html?id=" + msg.msg[i].id + "\" target=\"_blank\">" +
-                    "<div class=\"layui-col-md3 layui-col-xs3 title\">" + msg.msg[i].title + "</div>" +
-                    "<div class=\"layui-col-md4 layui-col-xs3 content\">" + msg.msg[i].content + "</div>" +
+                    "<div class=\"layui-col-md3 layui-col-xs3 title\">" + xss_defender(msg.msg[i].title) + "</div>" +
+                    "<div class=\"layui-col-md4 layui-col-xs3 content\">" + xss_defender(msg.msg[i].content) + "</div>" +
                     "<div class=\"layui-col-md2 layui-col-xs2 writer\">" + msg.msg[i].user + "</div>" +
                     "<div class=\"layui-col-md2 layui-col-xs2 datetime\">" + msg.msg[i].create_time + "</div>" +
                     "<div class=\"layui-col-md1 layui-col-xs2 watched\">" + msg.msg[i].watch_num + "</div>" +

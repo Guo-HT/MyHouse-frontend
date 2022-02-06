@@ -49,7 +49,7 @@ $(function () {
             data: {
                 sn: sn,
                 work_type: TYPE_WORK[func],
-                machine_name: machine_name,
+                machine_name: xss_defender(machine_name),
             },
             xhrFields: {
                 withCredentials: true // 发送Ajax时，Request header中会带上 Cookie 信息。

@@ -36,12 +36,12 @@ $(function () {
         if (type == "text") {  // 如果消息为文本
             var html_content_list = '<div class="msg_box layui-clear"><div class="recv">' +
                 '<img src="' + app_root + media_url + head + '" alt="" class="user_head"><div class="content">' +
-                content + '</div></div></div>';
+                xss_defender(content) + '</div></div></div>';
         } else if (type == "file") {  // 如果消息为文件
             var file_name = content.split("/upload_files/chat_file/")[1];
             var html_content_list = '<div class="msg_box layui-clear"><div class="recv">' +
                 '<img src="' + app_root + media_url + head + '" alt="" class="user_head"><div class="content">' +
-                '<a href="' + app_root + content + '" target="_blank">' + file_name + '</a></div></div></div>';
+                '<a href="' + app_root + content + '" target="_blank">' + xss_defender(file_name) + '</a></div></div></div>';
         } else if (type == "image") {
             var file_name = content.split("/upload_files/chat_file/")[1];
             var html_content_list = '<div class="msg_box layui-clear"><div class="recv">' +
@@ -50,7 +50,7 @@ $(function () {
         }
         // 左侧用户列表
         var html_user_list = '<div class="user_li layui-clear" id="' + from_id + '"><img src="' + app_root + media_url + head + '" alt="">' +
-            '<div class="user_name">' + from_name + '</div><div class="last_time">' + time + '</div><div class="pre_content">' + content.slice(0, 10) + '</div></div>';
+            '<div class="user_name">' + from_name + '</div><div class="last_time">' + time + '</div><div class="pre_content">' + xss_defender(content.slice(0, 10)) + '</div></div>';
 
         if ($("#" + from_id).length > 0) {
             // 左侧用户列表有此用户
@@ -98,7 +98,7 @@ $(function () {
         }
 
         var oSendContent = {
-            text: new_content,  // 内容
+            text: xss_defender(new_content),  // 内容
             to: repeat_user_id,  // 给客服发送
             time: moment().format('YYYY-MM-DD hh:mm:ss.SSS'),  // 时间戳
             type: "text",
@@ -107,7 +107,7 @@ $(function () {
         $("#msg_input").val("");
         var html = '<div class="msg_box layui-clear"><div class="send">' +
             '<img src="/img/default-head.png" alt="" class="user_head"><div class="content">' +
-            new_content + '</div></div></div>';
+            xss_defender(new_content) + '</div></div></div>';
         $("#chat" + repeat_user_id).append(html);
         $("#chat" + repeat_user_id).children(":last").get(0).scrollIntoView(false);
     })
@@ -248,7 +248,7 @@ $(function () {
                 // console.log(key, data[key]);
 
                 var html_user_list = html_user_list + '<div class="user_li layui-clear" id="' + key + '"><img src="' + app_root + data[key].media_url + data[key].head + '" alt="">' +
-                    '<div class="user_name">' + data[key].name + '</div><div class="last_time">' + data[key]["his"][0].time.split(" ")[1].slice(0, 8) + '</div><div class="pre_content">' + data[key]["his"][0].content.slice(0, 10) + '</div></div>';
+                    '<div class="user_name">' + data[key].name + '</div><div class="last_time">' + data[key]["his"][0].time.split(" ")[1].slice(0, 8) + '</div><div class="pre_content">' + xss_defender(data[key]["his"][0].content.slice(0, 10)) + '</div></div>';
 
                 var html_content_list = "";
                 for (var i = data[key]["his"].length - 1; i >= 0; i--) {
@@ -259,11 +259,11 @@ $(function () {
                         if (this_data.type == "recv") {
                             var html_content_list = html_content_list + '<div class="msg_box layui-clear"><div class="recv">' +
                                 '<img src="' + app_root + data[key].media_url + data[key].head + '" alt="" class="user_head"><div class="content">' +
-                                this_data.content + '</div></div></div>';
+                                xss_defender(this_data.content) + '</div></div></div>';
                         } else if (this_data.type == "send") {
                             var html_content_list = html_content_list + '<div class="msg_box layui-clear"><div class="send">' +
                                 '<img src="/img/default-head.png" alt="" class="user_head"><div class="content">' +
-                                this_data.content + '</div></div></div>';
+                                xss_defender(this_data.content) + '</div></div></div>';
                         }
                     }
                     else if (this_data.content_type == "file") {  // 如果消息为文件

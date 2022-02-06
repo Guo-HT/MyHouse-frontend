@@ -3,17 +3,19 @@
     margin: 0;
 }
 .layui-header{
-    min-width: 888px;
+    min-width: 1000px;
 }
 
 .nav-left{
     position: absolute;
     left:0;
+    vertical-align: top;
 }
 .nav-right{
     position:absolute;
     right:0;
     margin: 0 20px;
+    vertical-align: top;
 }
 
 .layui-nav .layui-badge, .layui-nav .layui-badge-dot{
@@ -25,5 +27,8 @@
 }
 .btn-box button{
     display:inline-block;
-    
+}
+
+.title_icon{
+    color:aliceblue;
 }
