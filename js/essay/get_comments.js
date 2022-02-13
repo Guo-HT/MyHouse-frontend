@@ -7,14 +7,14 @@ $(function () {
     var id = params.get('id')
 
     // 获取评论及回复 start
-    function get_all_comment(page){
+    function get_all_comment(page) {
         $.ajax({
             url: app_root + "/essay/comment",
             type: "get",
             dataType: "json",
             data: {
                 for: id,
-                page:page,
+                page: page,
             },
             headers: {
                 "X-CSRFToken": get_csrf_token(),
@@ -48,7 +48,7 @@ $(function () {
                 $("#comments_num").text(msg.total_count);
                 for (var i = 0; i < msg.msg.length; i++) {
                     html += '<li class="root"><div class="line1"><span class="head_span"><img src="' + app_root + msg.msg[i].upload_file + msg.msg[i].head_path + '" alt=""></span>' +
-                        '<span class="username_span">' + msg.msg[i].user_name + '</span><span class="comment_time">' + msg.msg[i].time + '</span><input type="hidden" value="'+msg.msg[i].comment_id+'"></div>' +
+                        '<span class="username_span">' + msg.msg[i].user_name + '</span><span class="comment_time">' + msg.msg[i].time + '</span><input type="hidden" value="' + msg.msg[i].comment_id + '"></div>' +
                         '<div class="line2"><div class="comment_content">' + xss_defender(msg.msg[i].comment) + '</div></div>' +
                         '<div class="line3"><i class="layui-icon layui-icon-heart-fill comment_good_icon"></i>' +
                         '<span class="comment_good_num">' + msg.msg[i].good_num + '</span><span class="comment_reply_switch">回复</span></div>' +
@@ -59,7 +59,7 @@ $(function () {
                     for (var j = 0; j < msg.msg[i].reply.length; j++) {
                         console.log(xss_defender(msg.msg[i].reply[j].comment));
                         html += '<li class="child"><div class="line1"><span class="head_span"><img src="' + app_root + msg.msg[i].upload_file + msg.msg[i].reply[j].head_path + '" alt=""></span>' +
-                            '<span class="username_span">' + msg.msg[i].reply[j].user_name + '</span><span style="color:#AEAEAE;"> 回复 </span><span>' + msg.msg[i].reply[j].reply_to + '</span><span class="comment_time">' + msg.msg[i].reply[j].time + '</span><input type="hidden" value="'+msg.msg[i].reply[j].comment_id+'"></div>' +
+                            '<span class="username_span">' + msg.msg[i].reply[j].user_name + '</span><span style="color:#AEAEAE;"> 回复 </span><span>' + msg.msg[i].reply[j].reply_to + '</span><span class="comment_time">' + msg.msg[i].reply[j].time + '</span><input type="hidden" value="' + msg.msg[i].reply[j].comment_id + '"></div>' +
                             '<div class="line2"><div class="comment_content">' + xss_defender(msg.msg[i].reply[j].comment) + '</div></div>' +
                             '<div class="line3"><i class="layui-icon layui-icon-heart-fill comment_good_icon"></i>' +
                             '<span class="comment_good_num">' + msg.msg[i].reply[j].good_num + '</span><span class="comment_reply_switch">回复</span></div>' +
@@ -72,7 +72,7 @@ $(function () {
                 $("#comment_list").html(html);
             }
         })
-    } 
+    }
     get_all_comment(1);
     // 获取评论及回复 end
 
@@ -105,7 +105,7 @@ $(function () {
             },
         }).done(function (msg) {
             console.log(msg);
-            if(msg.state=="fail" && msg.msg=="jump to login"){
+            if (msg.state == "fail" && msg.msg == "jump to login") {
                 layer.msg("请登录");
                 return;
             }
@@ -113,7 +113,7 @@ $(function () {
                 $("#input_comment").val("");
                 // 回显
                 var html = '<li class="root"><div class="line1"><span class="head_span"><img src="' + app_root + msg.msg.upload_file + msg.msg.head_path + '" alt=""></span>' +
-                    '<span class="username_span">' + msg.msg.user_name + '</span><span class="comment_time">' + msg.msg.time + '</span><input type="hidden" value="'+msg.msg.comment_id+'"></div>' +
+                    '<span class="username_span">' + msg.msg.user_name + '</span><span class="comment_time">' + msg.msg.time + '</span><input type="hidden" value="' + msg.msg.comment_id + '"></div>' +
                     '<div class="line2"><div class="comment_content">' + xss_defender(msg.msg.comment) + '</div></div>' +
                     '<div class="line3"><i class="layui-icon layui-icon-heart-fill comment_good_icon"></i>' +
                     '<span class="comment_good_num">' + msg.msg.good_num + '</span>' +
@@ -125,7 +125,10 @@ $(function () {
                 $("#comment_list").html(html + $("#comment_list").html());
             }
         }).fail(function (e) {
-            console.log(e);
+            if(e.responseJSON.msg=="wait"){
+                layer.msg("休息一会儿吧~");
+                return
+            }
         })
     });
     // 发表评论 end
@@ -171,7 +174,7 @@ $(function () {
                 reply_content: reply_content,  // 回复的内容，自己输入的
                 root_id: root_id,
                 reply_id: reply_id,
-                reply_type:reply_type,  // 回复的是root还是child
+                reply_type: reply_type,  // 回复的是root还是child
                 essay_id: id,
             },
             xhrFields: {
@@ -183,47 +186,52 @@ $(function () {
             },
         }).done(function (msg) {
             console.log(msg);
-            html = '<li class="child"><div class="line1"><span class="head_span"><img src="' + app_root + msg.msg.upload_file + msg.msg.head_path + '" alt=""></span>' +
-                '<span class="username_span">' + msg.msg.user_name + '</span><span style="color:#AEAEAE;"> 回复 </span><span>' + msg.msg.reply_to + '</span><span class="comment_time">' + msg.msg.time + '</span><input type="hidden" value="'+msg.msg.comment_id+'"></div>' +
-                '<div class="line2"><div class="comment_content">' + xss_defender(msg.msg.comment) + '</div></div><div class="line3"><i class="layui-icon layui-icon-heart-fill comment_good_icon"></i>' +
-                '<span class="comment_good_num">' + msg.msg.good_num + '</span><span class="comment_reply_switch">回复</span></div><div class="line4"><div class="layui-row"><div class="layui-col-md11 layui-col-xs10">' +
-                '<input type="text" id="comment_reply" class="comment_reply" placeholder="回复"></div>' +
-                '<div class="layui-col-md1 layui-col-xs2"><button class="comment_reply_btn" id="comment_reply_btn">发布</button></div></div></div></li>'
-            // $(this).parent().parent().parent().parent().after(html);
-            $(this).parent().parent().find(".comment_reply").val("");
-            $("#comment_list").html(html+$("#comment_list").html());
+            if (msg.state == "ok") {
+                html = '<li class="child"><div class="line1"><span class="head_span"><img src="' + app_root + msg.msg.upload_file + msg.msg.head_path + '" alt=""></span>' +
+                    '<span class="username_span">' + msg.msg.user_name + '</span><span style="color:#AEAEAE;"> 回复 </span><span>' + msg.msg.reply_to + '</span><span class="comment_time">' + msg.msg.time + '</span><input type="hidden" value="' + msg.msg.comment_id + '"></div>' +
+                    '<div class="line2"><div class="comment_content">' + xss_defender(msg.msg.comment) + '</div></div><div class="line3"><i class="layui-icon layui-icon-heart-fill comment_good_icon"></i>' +
+                    '<span class="comment_good_num">' + msg.msg.good_num + '</span><span class="comment_reply_switch">回复</span></div><div class="line4"><div class="layui-row"><div class="layui-col-md11 layui-col-xs10">' +
+                    '<input type="text" id="comment_reply" class="comment_reply" placeholder="回复"></div>' +
+                    '<div class="layui-col-md1 layui-col-xs2"><button class="comment_reply_btn" id="comment_reply_btn">发布</button></div></div></div></li>'
+                // $(this).parent().parent().parent().parent().after(html);
+                $(this).parent().parent().find(".comment_reply").val("");
+                $("#comment_list").html(html + $("#comment_list").html());
+            } 
         }).fail(function (e) {
-            console.log(e);
+            if(e.responseJSON.msg=="wait"){
+                layer.msg("休息一会儿吧~");
+                return
+            }
         })
     })
     // 发表回复 end
 
     // 评论、回复点赞 start
-    $("#comment_list").on("click", ".comment_good_icon", function(){
+    $("#comment_list").on("click", ".comment_good_icon", function () {
         var comment_type = $(this).parent().parent().attr("class");
         var comment_id = $(this).parent().parent().find("input").val();
         var good_num_obj = $(this).parent().parent().find(".comment_good_num");
         $.ajax({
-            url:app_root+"/essay/c_r_good",
-            type:'post',
-            dataType:"json",
-            data:{
-                comment_type:comment_type,
-                comment_id:comment_id,
+            url: app_root + "/essay/c_r_good",
+            type: 'post',
+            dataType: "json",
+            data: {
+                comment_type: comment_type,
+                comment_id: comment_id,
             },
-            xhrFields:{
-                withCredentials:true,
+            xhrFields: {
+                withCredentials: true,
             },
-            crossDomain:true,
+            crossDomain: true,
             headers: {
                 "X-CSRFToken": get_csrf_token(),
             },
-        }).done(function(msg){
+        }).done(function (msg) {
             // console.log(msg);
-            if(msg.state=="ok"){
+            if (msg.state == "ok") {
                 good_num_obj.text(msg.msg.good_num);
             }
-        }).fail(function(e){
+        }).fail(function (e) {
             console.log(e);
         })
     })

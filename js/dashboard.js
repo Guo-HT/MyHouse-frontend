@@ -470,7 +470,7 @@ $(function () {
                 $("#USED").text(parseInt(msg.msg.mem.used/(1024*1024)) + " MB");
                 $("#CACHED").text(parseInt(msg.msg.mem.cached/(1024*1024)) + " MB");
                 $("#FREE").text(parseInt(msg.msg.mem.free/(1024*1024)) + " MB");
-                $("#SWAP").text(parseInt(msg.msg.mem.swap/(1024*1024)) + " MB");
+                $("#SWAP").text(parseInt(msg.msg.mem.swap_used/(1024*1024)) + " MB");
                 $("#RUNNING").text(msg.msg.mem.running);
                 option_mem_gauge.series[0].data[0].value = msg.msg.mem.mem_percent;
                 option_mem_gauge && chart_mem_gauge.setOption(option_mem_gauge);
