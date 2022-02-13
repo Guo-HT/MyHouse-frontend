@@ -1,5 +1,6 @@
 .layui-container{
     padding-bottom: 20px;
+    min-width:1000px;
 }
 .dash-left{
     background-color: #E0E0DE;

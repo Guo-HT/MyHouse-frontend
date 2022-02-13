@@ -442,7 +442,7 @@ $(function () {
             }
         })
     }
-    // get_server_info()
+    get_server_info()
 
     function get_server_status(){
         $.ajax({
