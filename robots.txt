@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /user/
+Allow: /machine/
+Allow: /org/
+Allow: /service/
+Allow: /img/
+Disallow: /layui-v2.5.7/
+Disallow: /js/
+Disallow: /font/
+Disallow: /css/
+Disallow: /ckeditor/

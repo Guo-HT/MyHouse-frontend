@@ -9,7 +9,7 @@ $(function () {
     if ($.cookie("is_login") == 'false' || $.cookie("is_login") === undefined || $.cookie("user_type")!="user") {
         location.href = "/user/login.html";
     }
-    ws = new WebSocket("ws://127.0.0.1:8000/data/wstest/");
+    ws = new WebSocket(ws_root+"/data/wstest/");
 
     ws.onopen = function () {
         console.log("已建立连接");
@@ -123,7 +123,7 @@ $(function () {
                 var new_content = "";
                 for (var i = 0; i < file_name.length; i++) {
                     if (file_name[i] == "\n" || file_name[i] == "\r" || file_name[i] == "\b" || file_name[i] == "\v" || file_name[i] == "\t") {
-                        console.log(file_name[i])
+                        //console.log(file_name[i])
                         new_content += "<br>";
                     } else {
                         new_content += file_name[i];
@@ -158,13 +158,13 @@ $(function () {
             "X-CSRFToken": get_csrf_token(),
         },
     }).done(function(msg){
-        console.log(msg);
+        //console.log(msg);
         if(msg.state=="ok"){
             var data = msg.msg;
                 var html_content_list = "";
                 for(var i=data.length-1; i>=0; i--){
                     var this_data = data[i];
-                    console.log(this_data);
+                    //console.log(this_data);
                     if (this_data.content_type=="text"){  // 如果消息为文本
                         if(this_data.type=="recv"){
                             var html_content_list = html_content_list + '<div class="msg_box layui-clear"><div class="recv">' +

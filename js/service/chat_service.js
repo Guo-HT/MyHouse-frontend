@@ -10,7 +10,7 @@ $(function () {
         location.href = "/service/login.html";
     } else {
         // 建立ws连接
-        ws = new WebSocket("ws://127.0.0.1:8000/data/wstest/");
+        ws = new WebSocket(ws_root + "/data/wstest/");
     }
 
 
@@ -175,7 +175,7 @@ $(function () {
                 var new_content = "";
                 for (var i = 0; i < file_name.length; i++) {
                     if (file_name[i] == "\n" || file_name[i] == "\r" || file_name[i] == "\b" || file_name[i] == "\v" || file_name[i] == "\t") {
-                        console.log(file_name[i])
+                        //console.log(file_name[i])
                         new_content += "<br>";
                     } else {
                         new_content += file_name[i];
@@ -216,7 +216,7 @@ $(function () {
                     "X-CSRFToken": get_csrf_token(),
                 },
             }).done(function (msg) {
-                console.log(msg);
+                //console.log(msg);
                 if (msg.state == "ok") {
                     location.reload();
                     // layer.msg("已退出登录");

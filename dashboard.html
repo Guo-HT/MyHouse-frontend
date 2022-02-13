@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务器状态</title>
+    <script src="/js/jquery-1.12.4.min.js"></script>
+    <script src="/layui-v2.5.7/layui.js"></script>
+    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+    <link rel="stylesheet" href="/layui-v2.5.7/css/layui.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <script src="/js/dashboard.js"></script>
+</head>
+
+<body>
+    <div class="layui-layout layui-layout-admin">
+        <div class="layui-header" id="myhead">
+            <ul class="layui-nav">
+                <li class="layui-nav-item">MyHouse智能家居系统&nbsp;&nbsp;&nbsp;服务器状态</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-container layui-clear">
+        <!-- 左栏 start -->
+        <div class="layui-col-md3 dash-left">
+            <img src="/img/rpi_pic.png" alt="" class="server_img">
+            <ul class="left_ul">
+                <li class="left_li">
+                    <div class="title">内网IP地址</div>
+                    <div class="content" id="inner_ip">未知</div>
+                </li>
+                <li class="left_li">
+                    <div class="title">公网IP地址</div>
+                    <div class="content" id="outer_ip">未知</div>
+                </li>
+                <li class="left_li">
+                    <div class="title">开机时间</div>
+                    <div class="content" id="open_time">未知</div>
+                </li>
+                <li class="left_li">
+                    <div class="title">当前用户</div>
+                    <div class="content" id="user_name">未知</div>
+                </li>
+                <li class="left_li">
+                    <div class="title">操作系统</div>
+                    <div class="content" id="system">未知</div>
+                </li>
+                <li class="left_li">
+                    <div class="title">网络名称</div>
+                    <div class="content" id="node">未知</div>
+                </li>
+                <li class="left_li">
+                    <div class="title">指令集</div>
+                    <div class="content" id="machine">未知</div>
+                </li>
+
+            </ul>
+        </div>
+        <!-- 左栏 end -->
+
+        <!-- 右栏 start -->
+        <div class="layui-col-md9 dash-right">
+            <div class="layui-row">
+                <!-- 大仪表 start -->
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md12">
+                            <div class="cpu_gauge" id="cpu_gauge" style="width:100%;height:300px;"></div>
+                        </div>
+                        <div class="layui-col-md12 data_table_cpu">
+                            <h4>CPU</h4>
+                            <div class="layui-col-md3 data_item" title="频率">
+                                <div class="content" id="MHz">1500</div>
+                                <div class="title">MHz</div>
+                            </div>
+                            <div class="layui-col-md3 data_item" title="核心数">
+                                <div class="content" id="CORE">0</div>
+                                <div class="title">CORE</div>
+                            </div>
+                            <div class="layui-col-md3 data_item" title="温度">
+                                <div class="content" id="temp">0</div>
+                                <div class="title">℃</div>
+                            </div>
+                            <div class="layui-col-md3 data_item" title="空闲进程">
+                                <div class="content" id="IDEL">0</div>
+                                <div class="title">IDEL</div>
+                            </div>
+                            <div class="layui-col-md2 data_item" title="用户进程">
+                                <div class="content" id="USER">0</div>
+                                <div class="title">USER</div>
+                            </div>
+                            <div class="layui-col-md2 data_item" title="系统进程">
+                                <div class="content" id="SYS">0</div>
+                                <div class="title">SYSTEM</div>
+                            </div>
+                            <div class="layui-col-md2 data_item" title="优先进程">
+                                <div class="content" id="NICE">0</div>
+                                <div class="title">NICE</div>
+                            </div>
+                            <div class="layui-col-md2 data_item" title="I/O">
+                                <div class="content" id="IOW">0</div>
+                                <div class="title">IOW</div>
+                            </div>
+                            <div class="layui-col-md2 data_item" title="硬件中断">
+                                <div class="content" id="IRQ">0</div>
+                                <div class="title">IRQ</div>
+                            </div>
+                            <div class="layui-col-md2 data_item" title="软件中断">
+                                <div class="content" id="SIRQ">0</div>
+                                <div class="title">SIRQ</div>
+                            </div>
+                            <div class="layui-col-md12 data_item platform" id="platform" title="平台信息">-</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-row">
+                        <div class="layui-col-md12">
+                            <div class="mem_gauge" id="mem_gauge" style="width:100%;height:300px;"></div>
+                        </div>
+                        <div class="layui-col-md12 data_table_mem">
+                            <h4>MEMORY</h4>
+                            <div class="layui-col-md6 data_item" title="占用">
+                                <div class="content" id="USED">0</div>
+                                <div class="title">USED</div>
+                            </div>
+                            <div class="layui-col-md6 data_item" title="缓存">
+                                <div class="content" id="CACHED">0</div>
+                                <div class="title">CACHED</div>
+                            </div>
+                            <div class="layui-col-md6 data_item" title="空闲">
+                                <div class="content" id="FREE">0</div>
+                                <div class="title">FREE</div>
+                            </div>
+                            <div class="layui-col-md6 data_item" title="交换">
+                                <div class="content" id="SWAP">0</div>
+                                <div class="title">SWAP</div>
+                            </div>
+                            <!-- <div class="layui-col-md3 data_item">
+                                <div class="content" id=""></div>
+                                <div class="title">AVG 1M</div>
+                            </div>
+                            <div class="layui-col-md3 data_item">
+                                <div class="content" id=""></div>
+                                <div class="title">AVG 5M</div>
+                            </div>
+                            <div class="layui-col-md3 data_item">
+                                <div class="content" id=""></div>
+                                <div class="title">AVG 10M</div>
+                            </div> -->
+                            <div class="layui-col-md12 data_item" title="进程">
+                                <div class="content" id="RUNNING">0</div>
+                                <div class="title">RUNNING</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 大仪表 end -->
+                <!-- 小仪表 start -->
+                <div class="layui-col-md4 small_chart">
+                    <div class="layui-row">
+                        <div class="layui-col-md12">
+                            <div class="cache_gauge" id="cache_gauge" style="width:100%;height:200px;"></div>
+                        </div>
+                        <div class="layui-col-md12 table">
+                            <h4>CACHE</h4>
+                            <div class="layui-col-md6 data_item" title="读缓存">
+                                <div class="content" id="cache_used">0</div>
+                                <div class="title">USED</div>
+                            </div>
+                            <div class="layui-col-md6 data_item" title="写缓存">
+                                <div class="content" id="cache_buffers">0</div>
+                                <div class="title">BUFFERS</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md4 small_chart">
+                    <div class="layui-row">
+                        <div class="layui-col-md12">
+                            <div class="cache_gauge" id="swap_gauge" style="width:100%;height:200px;"></div>
+                        </div>
+                        <div class="layui-col-md12 table">
+                            <h4>SWAP</h4>
+                            <div class="layui-col-md6 data_item" title="占用">
+                                <div class="content" id="swap_used">0</div>
+                                <div class="title">USED</div>
+                            </div>
+                            <div class="layui-col-md6 data_item" title="空闲">
+                                <div class="content" id="swap_free">0</div>
+                                <div class="title">FREE</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-col-md4 small_chart">
+                    <div class="layui-row">
+                        <div class="layui-col-md12">
+                            <div class="cache_gauge" id="disk_gauge" style="width:100%;height:200px;"></div>
+                        </div>
+                        <div class="layui-col-md12 table">
+                            <h4>DISK</h4>
+                            <div class="layui-col-md6 data_item" title="占用">
+                                <div class="content" id="disk_used">0</div>
+                                <div class="title">USED</div>
+                            </div>
+                            <div class="layui-col-md6 data_item" title="空闲">
+                                <div class="content" id="disk_free">0</div>
+                                <div class="title">FREE</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 小仪表 end -->
+                <!-- 网络 start -->
+                <div class="layui-col-md12">
+                    <div class="layui-row net_data">
+                        <div class="layui-col-md4 net_data_item" title="网络上行">
+                            <span><svg t="1644727015993" class="icon" viewbox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2249" width="24" height="24"><path d="M507.733333 213.333333v725.333334h42.666667V204.8l145.066667 145.066667 29.866666-29.866667L533.333333 128 341.333333 320l29.866667 29.866667L507.733333 213.333333z" fill="#444444" p-id="2250"></path></svg></span>
+                            <span class="data_item" id="up_speed"></span>
+                        </div>
+                        <div class="layui-col-md4 net_data_item" title="网络下行">
+                            <span><svg t="1644727048725" class="icon" viewbox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3076" width="24" height="24"><path d="M558.933333 853.333333V128h-42.666666v733.866667l-145.066667-145.066667-29.866667 29.866667 192 192 192-192-29.866666-29.866667-136.533334 136.533333z" fill="#444444" p-id="3077"></path></svg></span>
+                            <span class="data_item" id="down_speed"></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- 网络 end -->
+            </div>
+        </div>
+        <!-- 右栏 end -->
+    </div>
+
+</body>
+
+</html>
