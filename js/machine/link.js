@@ -200,10 +200,10 @@ $(function () {
                 for (var i = 0; i < link_length; i++) {
                     var data = msg.msg[i];
                     html_li = html_li + '<li class="layui-col-md3 layui-col-sm4 layui-col-xs6 link_list_li">' +
-                        '<input type="hidden" name="link_id" value="'+data.link_id+'" id="link_id"><input type="hidden" name="upper_id" value="'+data.upper_id+'" id="upper_id">' +
-                        '<input type="hidden" name="lower_id" value="'+data.lower_id+'" id="lower_id"><div class="link_list_content"><div class="link_content">当' +
-                        '<span class="machine_name_em">'+xss_defender(data.upper_name)+'</span>，<span>'+convert_data_item(data.data_item)+'</span><span>'+convert_logic(data.condition)+'</span><span>'+data.condition_num+'</span>时<br>' +
-                        '<span class="machine_name_em">'+xss_defender(data.lower_name)+'</span><span>状态</span>置<span>'+data.command_num+'</span></div>' +
+                        '<input type="hidden" name="link_id" value="' + data.link_id + '" id="link_id"><input type="hidden" name="upper_id" value="' + data.upper_id + '" id="upper_id">' +
+                        '<input type="hidden" name="lower_id" value="' + data.lower_id + '" id="lower_id"><div class="link_list_content"><div class="link_content">当' +
+                        '<span class="machine_name_em">' + xss_defender(data.upper_name) + '</span>，<span>' + convert_data_item(data.data_item) + '</span><span>' + convert_logic(data.condition) + '</span><span>' + data.condition_num + '</span>时<br>' +
+                        '<span class="machine_name_em">' + xss_defender(data.lower_name) + '</span><span>状态</span>置<span>' + data.command_num + '</span></div>' +
                         '<div class="link_cut"><button class="layui-btn layui-btn-xs" id="cut_link_btn">解除</button></div></div></li>';
                 }
                 $("#link_list_ul").html(html_li);
@@ -215,44 +215,43 @@ $(function () {
     }
     show_already_link(1);
 
-    function convert_logic(word){
-        if(word=="gt"){
+    function convert_logic(word) {
+        if (word == "gt") {
             return ">";
-        }else if(word == "lt"){
+        } else if (word == "lt") {
             return "<";
-        }else if(word == "eq"){
+        } else if (word == "eq") {
             return "=";
         }
     }
 
-    function convert_data_item(word){
-        if(word=="LED_state"){
+    function convert_data_item(word) {
+        if (word == "LED_state") {
             return "开关";
-        }else if(word == "temp"){
+        } else if (word == "temp") {
             return "温度";
-        }else if(word == "humidity"){
+        } else if (word == "humidity") {
             return "湿度";
         }
     }
 
-    $("#link_list_ul").on("click", "#cut_link_btn", function(){
+    $("#link_list_ul").on("click", "#cut_link_btn", function () {
+        var link_id = $(this).parent().parent().parent().find("#link_id").val();
+        var upper_id = $(this).parent().parent().parent().find("#upper_id").val();
+        var lower_id = $(this).parent().parent().parent().find("#lower_id").val();
         layer.confirm('真的要删除联动吗?', { icon: 3, title: '删除', btn: ["取消", "删除"] }, function (index) {
             console.log("1")
             layer.close(index);
             return false;
         }, function (index) {
-            console.log("2")
+            // console.log("2")
             layer.msg("删除中");
-            var link_id = $(this).parent().parent().parent().find("#link_id").val();
-            var upper_id = $(this).parent().parent().parent().find("#upper_id").val();
-            var lower_id = $(this).parent().parent().parent().find("#lower_id").val();
-            // console.log(link_id, upper_id, lower_id);
-    
+            console.log(link_id, upper_id, lower_id);
             $.ajax({
-                url: app_root + "/data/get_machine_link",
-                type:"delete",
-                dataType:"json",
-                data:{
+                url: app_root + "/data/delete_link",
+                type: "post",
+                dataType: "json",
+                data: {
                     link_id: link_id,
                 },
                 xhrFields: {
@@ -262,9 +261,9 @@ $(function () {
                 headers: {
                     "X-CSRFToken": get_csrf_token(),
                 },
-            }).done(function(msg){
+            }).done(function (msg) {
                 console.log(msg);
-                if(msg.state=="ok"){
+                if (msg.state == "ok") {
                     layer.msg("已删除");
                     show_already_link(1);
                 }
