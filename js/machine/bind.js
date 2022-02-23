@@ -3,7 +3,7 @@ $(function () {
         var element = layui.element;
         var layer = layui.layer;
     })
-    if ($.cookie("is_login") == "false") {
+    if ($.cookie("is_login") == "false" || $.cookie("is_login")==undefined) {
         location.href = "/user/login.html";
     }
 
@@ -83,6 +83,8 @@ $(function () {
                 layer.msg("其他用户已绑定该设备");
             }else if(msg.msg=="already bind"){
                 layer.msg("您已绑定该设备");
+            }else if(msg.msg=="jump to login"){
+                layer.msg("请登录！");
             }
         })
     })

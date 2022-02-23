@@ -451,7 +451,7 @@ $(function () {
             dataType:"json",
         }).done(function(msg){
             if(msg.state=="ok"){
-                console.log(msg.msg);
+                // console.log(msg.msg);
                 // CPU数据
                 $("#MHz").text(msg.msg.cpu.cpu_freq);
                 $("#CORE").text(msg.msg.cpu.core);
@@ -487,10 +487,10 @@ $(function () {
                 $("#swap_free").text(parseInt((msg.msg.mem.swap_total-msg.msg.mem.swap_used)/(1024*1024))+" MB");
                 option_swap_gauge && chart_swap_gauge.setOption(option_swap_gauge);
                 // 硬盘数据
-                option_disk_gauge.series[0].max = parseInt((msg.msg.dict.total)/(1024*1024*1024));
-                option_disk_gauge.series[0].data[0].value = parseInt((msg.msg.dict.used)/(1024*1024*1024));
-                $("#disk_used").text(parseInt(msg.msg.dict.percent)+" %");
-                $("#disk_free").text(parseInt(msg.msg.dict.free/(1024*1024*1024))+" GB");
+                option_disk_gauge.series[0].max = parseInt((msg.msg.disk.total)/(1024*1024*1024));
+                option_disk_gauge.series[0].data[0].value = parseInt((msg.msg.disk.used)/(1024*1024*1024));
+                $("#disk_used").text(parseInt(msg.msg.disk.percent)+" %");
+                $("#disk_free").text(parseInt(msg.msg.disk.free/(1024*1024*1024))+" GB");
                 option_disk_gauge && chart_disk_gauge.setOption(option_disk_gauge);
                 // 网络数据
                 var sent = msg.msg.net.sent;
