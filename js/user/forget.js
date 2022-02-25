@@ -1,18 +1,18 @@
 $(function(){
     $("#user-password").blur(function () {
-        var reg = /^\w+$/;
+        var reg = /^(?![a-zA-Z]+$)(?![A-Z0-9]+$)(?![A-Z._~!@#$^&*]+$)(?![a-z0-9]+$)(?![a-z._~!@#$^&*]+$)(?![0-9._~!@#$^&*]+$)[a-zA-Z0-9._~!@#$^&*]{8,}$/;
         if ((!reg.test($("#user-password").val()))||($("#user-password").val().length < 6)) {
             $("#user-password").val("");
-            $("#tip-password").text("请使用数字、字母、下划线，且长度不小于6位。");
+            $("#tip-password").text("要求包含大、小写字母，数字，特殊字符(_!@#$%^&*()+.)的组合，不能低于8位");
         }else{
             $("#tip-password").text("");
         }
     })
     $("#user-password-check").blur(function () {
-        var reg = /^\w+$/;
+        var reg = /^(?![a-zA-Z]+$)(?![A-Z0-9]+$)(?![A-Z._~!@#$^&*]+$)(?![a-z0-9]+$)(?![a-z._~!@#$^&*]+$)(?![0-9._~!@#$^&*]+$)[a-zA-Z0-9._~!@#$^&*]{8,}$/;
         if ((!reg.test($("#user-password-check").val()))||($("#user-password-check").val().length < 6)) {
             $("#user-password-check").val("");
-            $("#tip-password-check").text("请使用数字、字母、下划线，且长度不小于6位。");
+            $("#tip-password-check").text("要求包含大、小写字母，数字，特殊字符(_!@#$%^&*()+.)的组合，不能低于8位");
         }else{
             $("#tip-password-check").text("");
         }
@@ -20,7 +20,7 @@ $(function(){
 
     $("#user-email").blur(function () {
         var reg = /^[a-z0-9._%-]+@([a-z0-9-]+\.)+[a-z]{2,4}$|^1[3|4|5|7|8]\d{9}$/;
-        if ((!reg.test($("#user-email").val()))||($("#user-email").val().length < 6)) {
+        if (!reg.test($("#user-email").val())) {
             $("#user-email").val("");
             $("#tip-user-email").text("邮件格式错误。");
         }else{

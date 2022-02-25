@@ -52,6 +52,13 @@
                         </div>
                         <div class="layui-form-mid layui-word-aux tip" id="tip-password"></div>
                     </div>
+                    <!-- 滑块验证 start -->
+                    <div class="layui-form-item">
+                        <!-- <label class="layui-form-label">滑动验证</label> -->
+                        <div class="layui-input-block" style="display:block;">
+                            <div id="slider"></div>
+                        </div>
+                    </div>
                     <!-- 记住我 start -->
                     <div class="layui-form-item">
                         <label class="layui-form-label">记住我</label>
@@ -76,14 +83,7 @@
         //Demo
         layui.use('form', function () {
             var form = layui.form;
-            // //监听提交
-            // form.on('submit(*)', function (data) {
-            //     // layer.msg(JSON.stringify(data.field));
-            //     // return false;
-            // });
         });
     </script>
-
 </body>
-
 </html>

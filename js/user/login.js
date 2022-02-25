@@ -1,20 +1,40 @@
 $(function () {
 
-    // $("#user-name").blur(function () {
-    //     var reg = /^\w+$/;
-    //     if ((!reg.test($("#user-name").val()))||($("#user-name").val().length < 6)) {
-    //         $("#user-name").val("");
-    //         $("#tip-user-name").text("请使用数字、字母、下划线，且长度不小于6位。");
-    //     }else{
-    //         $("#tip-user-name").text("");
-    //     }
-    // })
+    var slider;
+    //一般直接写在一个js文件中
+    layui.config({
+        base: '/js/'
+    }).extend({
+        sliderVerify:"sliderVerify"
+    }).use(['sliderVerify', 'jquery', 'form'], function() {
+        var sliderVerify = layui.sliderVerify,
+            form = layui.form;
+        slider = sliderVerify.render({
+            elem: '#slider',
+            // onOk: function(){//当验证通过回调
+            // 	// layer.msg("滑块验证通过");
+            // },
+            isAutoVerify: false,
+            bg: "layui-bg-red",
+            text: "滑 动 验 证"
+        })
+    })
+
+    $("#user-name").blur(function () {
+        var reg = /^\w+$/;
+        if ((!reg.test($("#user-name").val()))||($("#user-name").val().length < 8)) {
+            $("#user-name").val("");
+            $("#tip-user-name").text("请使用数字、字母、下划线，且长度不小于8位。");
+        }else{
+            $("#tip-user-name").text("");
+        }
+    })
 
     $("#user-password").blur(function () {
-        var reg = /^\w+$/;
+        var reg = /^(?![a-zA-Z]+$)(?![A-Z0-9]+$)(?![A-Z._~!@#$^&*]+$)(?![a-z0-9]+$)(?![a-z._~!@#$^&*]+$)(?![0-9._~!@#$^&*]+$)[a-zA-Z0-9._~!@#$^&*]{8,}$/;
         if ((!reg.test($("#user-password").val()))||($("#user-password").val().length < 6)) {
             $("#user-password").val("");
-            $("#tip-password").text("请使用数字、字母、下划线，且长度不小于6位。");
+            $("#tip-password").text("要求包含大、小写字母，数字，特殊字符(_!@#$%^&*()+.)的组合（至少三种），不能低于8位");
         }else{
             $("#tip-password").text("");
         }
@@ -41,6 +61,10 @@ $(function () {
         }
         else if(user_name == "" && user_password == ""){
             layer.msg("请填写信息");
+            return;
+        }
+        else if(!slider.isOk()){
+            layer.msg("请完成滑动验证");
             return;
         }
         $.ajax({
