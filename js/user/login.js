@@ -20,15 +20,15 @@ $(function () {
         })
     })
 
-    $("#user-name").blur(function () {
-        var reg = /^\w+$/;
-        if ((!reg.test($("#user-name").val()))||($("#user-name").val().length < 8)) {
-            $("#user-name").val("");
-            $("#tip-user-name").text("请使用数字、字母、下划线，且长度不小于8位。");
-        }else{
-            $("#tip-user-name").text("");
-        }
-    })
+    // $("#user-name").blur(function () {
+    //     var reg = /^\w+$/;
+    //     if ((!reg.test($("#user-name").val()))||($("#user-name").val().length < 8)) {
+    //         $("#user-name").val("");
+    //         $("#tip-user-name").text("请使用数字、字母、下划线，且长度不小于8位。");
+    //     }else{
+    //         $("#tip-user-name").text("");
+    //     }
+    // })
 
     $("#user-password").blur(function () {
         var reg = /^(?![a-zA-Z]+$)(?![A-Z0-9]+$)(?![A-Z._~!@#$^&*]+$)(?![a-z0-9]+$)(?![a-z._~!@#$^&*]+$)(?![0-9._~!@#$^&*]+$)[a-zA-Z0-9._~!@#$^&*]{8,}$/;
