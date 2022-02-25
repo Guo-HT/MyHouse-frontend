@@ -29,7 +29,7 @@ $(function () {
 
     function get_machines_data() {
         if ($.cookie("is_login") == "false") {
-            $("#data_ul").html("<li>请登陆后查看</li>");
+            $("#data_ul").html("<li>请<a href='/user/login.html' style='color:blue;'>登录</a>后查看</li>");
             return;
         }
         $.ajax({
@@ -73,7 +73,7 @@ $(function () {
                 }
                 $("#data_ul").html(html);
             }else if(msg.msg="jump to login"){
-                $("#data_ul").html("<li>请登陆后查看</li>");
+                $("#data_ul").html("<li>请<a href='/user/login.html' style='color:blue;'>登录</a>后查看</li>");
             }
         }).fail(function (e) {
             console.log(e);
