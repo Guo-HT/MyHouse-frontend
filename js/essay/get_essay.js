@@ -39,6 +39,9 @@ $(function(){
         }
     }).fail(function(e){
         console.log(e);
+        if(e.status==404){
+            layer.msg("找不到这篇文章");
+        }
     })
 
 
