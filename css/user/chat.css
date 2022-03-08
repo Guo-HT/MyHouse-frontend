@@ -13,7 +13,7 @@
     height: calc(100vh - 80px - 165px);
     background-color: #F4F5F7;
     box-sizing: border-box;
-    border: 2px solid rgba(200, 70, 70, 0.3);
+    border: 2px solid rgba(220, 220, 220, 0.7);
     border-bottom: none;
     box-shadow: 0 1px 1px #F2F2F2 ;
     /* border-radius: 4px; */
@@ -51,7 +51,7 @@
     height: 165px;
     /* background-color: antiquewhite; */
     box-sizing: border-box;
-    border: 2px solid rgba(200, 70, 70, 0.3);
+    border: 2px solid rgba(220, 220, 220, 0.7);
     border-top:none;
 }
 

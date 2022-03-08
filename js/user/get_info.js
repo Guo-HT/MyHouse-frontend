@@ -1,6 +1,7 @@
 $(function () {
-    layui.use("element", function () {
+    layui.use(["element", "layer"], function () {
         var element = layui.element;
+        var layer = layui.layer;
     });
 
     $.ajax({
@@ -26,8 +27,8 @@ $(function () {
             $("#email_info").text(msg.msg.email);
             $("#reg_time").text(msg.msg.reg_time);
         }
-        else if(msg.state=="fail"){
-            location.href="/user/login.html";
+        else if (msg.state == "fail") {
+            location.href = "/user/login.html";
         }
     }).fail(function (e) {
         console.log(e);
@@ -80,7 +81,7 @@ $(function () {
                         '<div class="layui-card"><div class="layui-card-header">' + xss_defender(msg.msg[i].title) + '</div>' +
                         '<div class="layui-card-body">' + xss_defender(msg.msg[i].content) + '</div></div></a>';
                 }
-                console.log(html);
+                // console.log(html);
                 $("#history_content").html(html);
             }
         }).fail(function (e) {
@@ -89,7 +90,7 @@ $(function () {
     }
 
     get_history(1);
-    $("#history_switch").click(function () { get_history(1);})
+    $("#history_switch").click(function () { get_history(1); })
     // 获取历史记录 end
 
     // 获取收藏  start
@@ -139,7 +140,7 @@ $(function () {
                         '<div class="layui-card"><div class="layui-card-header">' + xss_defender(msg.msg[i].title) + '</div>' +
                         '<div class="layui-card-body">' + xss_defender(msg.msg[i].content) + '</div></div></a>';
                 }
-                console.log(html);
+                // console.log(html);
                 $("#collection_content").html(html);
 
             }
@@ -197,7 +198,7 @@ $(function () {
                         '<div class="layui-card"><div class="layui-card-header">' + xss_defender(msg.msg[i].title) + '</div>' +
                         '<div class="layui-card-body">' + xss_defender(msg.msg[i].content) + '</div></div></a>';
                 }
-                console.log(html);
+                // console.log(html);
                 $("#good_content").html(html);
             }
         }).fail(function (e) {
@@ -206,6 +207,104 @@ $(function () {
     }
     get_good(1);
 
-    $("#good_switch").click(function () {get_good(1) })
+    $("#good_switch").click(function () { get_good(1) })
     // 获取点赞 end
+
+    // 获取上传历史 start
+    function get_upload(page) {
+        $.ajax({
+            url: app_root + "/essay/get_per_info_list",
+            type: "get",
+            dataType: "json",
+            xhrFields: {
+                withCredentials: true,
+            },
+            crossDomain: true,
+            data: {
+                page: page,
+                type: "upload",
+            },
+            headers: {
+                "X-CSRFToken": get_csrf_token(),
+            },
+        }).done(function (msg) {
+            if (msg.state == "ok") {
+                layui.use('laypage', function () {
+                    const laypage = layui.laypage;
+                    //执行一个laypage实例
+                    laypage.render({
+                        elem: 'nav_upload', //注意，这里的 test1 是 ID，不用加 # 号
+                        count: msg.total_count, //数据总数，从服务端得到
+                        limit: msg.per_page,  //
+                        curr: page,
+                        jump: function (obj, first) {
+                            //obj包含了当前分页的所有参数，比如：
+                            // console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                            // console.log(obj.limit); //得到每页显示的条数
+                            //首次不执行
+                            if (!first) {
+                                //do something
+                                get_upload(obj.curr);
+                            }
+                        },
+                        layout: ['prev', 'page', 'next'],
+                    });
+                })
+                var html = "";
+                for (var i = 0; i < msg.msg.length; i++) {
+                    html += '<div class="layui-col-md3 layui-col-sm3 layui-col-xs3 my_upload_item history_link">' +
+                        '<a href="/org/essay.html?id=' + msg.msg[i].id + '">' + '<div class="layui-card layui-card-my">' +
+                        '<div class="layui-card-header">' + xss_defender(msg.msg[i].title) + '</div>' +
+                        '<div class="layui-card-body">' + xss_defender(msg.msg[i].content) + '</div></div></a>' +
+                        '<input type="hidden" name="id" value="' + msg.msg[i].id + '">' +
+                        '<div class="essay_delete_box" id="essay_delete_box"><i class="layui-icon layui-icon-delete"></i><span>删除</span></div></div>';
+                }
+                // console.log(html);
+                $("#my_upload_essay").html(html);
+            }
+        }).fail(function (e) {
+
+        });
+    }
+    get_upload(1);
+
+    $("#my_upload").click(function () { get_upload(1) })
+    // 获取上传历史 end
+
+    $("#my_upload_essay").on("click", "#essay_delete_box", function(){
+        var essay_id = $(this).prev().val();
+        layer.confirm("删除这篇文章？", {icon:3,title:"删除",btn:['取消', "删除"]
+        },
+        function(index){
+            console.log('1');
+            layer.close(index);
+            return false;
+        },
+        function(index){
+            console.log("2")
+            layer.msg("删除中");
+            $.ajax({
+                url: app_root + "/essay/detail",
+                type:"delete",
+                dataType:'json',
+                xhrFields: {
+                    withCredentials: true,
+                },
+                crossDomain: true,
+                data: {
+                    essay_id: essay_id
+                },
+                headers: {
+                    "X-CSRFToken": get_csrf_token(),
+                },
+            }).done(function(msg){
+                console.log(msg);
+                if(msg.state=="ok"){
+                    $("#my_upload").click();
+                }
+            }).fail(function(e){
+                console.log(e);
+            })
+        })
+    })
 })

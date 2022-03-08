@@ -108,6 +108,41 @@ body {
     vertical-align: auto;
 }
 
+.my_upload_item{
+    position:relative;
+    display:inline;
+}
+
+.essay_delete_box{
+    height:calc(100% - 8px);
+    width:20%;
+    margin: 4px 0;
+    box-sizing: border-box;
+    border-left:1px solid #f0f0f0;
+    position:absolute;
+    right:10px;
+    top:0;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #ffffff;
+}
+.essay_delete_box:hover{
+    background-color: #eeeeee;
+}
+
+.essay_delete_box .layui-icon{
+    display:block;
+    margin: 0px auto;
+}
+.essay_delete_box span{
+    font-size:10px;
+    line-height:14px;
+    display:block;
+    margin:2px auto;
+}
+
 .my_nav {
     text-align: center;
 }
@@ -124,4 +159,8 @@ body {
     white-space: normal;
     text-overflow: ellipsis;
     color: #aeaeae;
+}
+
+.layui-card-my{
+    width:80%;
 }
