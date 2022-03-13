@@ -4,9 +4,57 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <script src="/js/backend_url.js"></script>
+    <script src="/js/jquery-1.12.4.min.js"></script>
+    <title>IP黑名单</title>
+    <style>
+        li{
+            line-height:24px;
+            padding-left:20px;
+        }
+        li:hover{
+            background-color: rgba(230, 230, 230, 0.8);
+        }
+        ul{
+            list-style:none;
+        }
+        .id, .ip, .times, .last_time{
+            display:inline-block;
+        }
+        .id{
+            width:50px;
+        }
+        .ip{
+            width:15vw;
+        }
+        .times{
+            width:10vw;
+        }
+        .last_time{
+            width:40vw;
+        }
+    </style>
 </head>
 <body>
-    
+    <ul class="black_list" id="black_list" start="0">
+        <li><span class='id'> </span><span class='ip'>IP地址</span><span class='times'>攻击次数</span><span class='last_time'>最后攻击时间</span></li>
+    </ul>
 </body>
+<script>
+    $.ajax({
+        url:app_root+"/data/ip_ban",
+        type:"get",
+        dataType:"json",
+    }).done(function(msg){
+        if(msg.state=="ok"){
+            var data_length = msg.msg.length;
+            for(var i=0; i<data_length; i++){
+                var data = msg.msg[i];
+                $("#black_list").append("<li><span class='id'>"+(i+1)+"</span><span class='ip'>"+data.ip+"</span><span class='times'>"+data.times+"</span><span class='last_time'>"+data.last_time+"</span></li>")
+            }
+        }
+    }).fail(function(e){
+        console.log(e)
+    })
+</script>
 </html>
