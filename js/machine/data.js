@@ -1,4 +1,15 @@
 $(function () {
+
+    var paramsStr = window.location.search
+    var params = new URLSearchParams(paramsStr)
+    var id = params.get('id') // list
+    var type = params.get('type')
+    console.log(id, type);
+    if(id!=undefined && type!=undefined){
+        $("#machine_data_iframe").attr({"src": "/machine/iframe/" + WORK_TYPE[type] + ".html?id="+id + "&type=" + type})
+    }
+
+
     function get_machine_list() {
         $.ajax({
             url: app_root + "/data/machine",
@@ -68,5 +79,6 @@ $(function () {
         var machine_id = $(this).find(".machine_id").val();
         var work_type = $(this).find(".work_type").val();
         $("#machine_data_iframe").attr({"src": "/machine/iframe/"+WORK_TYPE[work_type]+".html?id="+machine_id+"&type="+work_type})
+	history.pushState({}, null, location.origin + location.pathname +"?type=" + work_type + "&id=" + machine_id);
     })
 })

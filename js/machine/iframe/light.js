@@ -55,10 +55,15 @@ $(function () {
             }
         }).fail(function (e) {
             console.log(e);
-        })
+            if(e.status==500){
+                layer.msg("错误，请检查设备类型与id是否正确");
+                clearInterval(timer1);
+	        clearInterval(timer2);
+	    }
+	})
     }
     get_data();
-    setInterval(get_data, 5000);
+    timer1 = setInterval(get_data, 5000);
 
     function get_command_history() {
         var paramsStr = window.location.search
@@ -98,7 +103,7 @@ $(function () {
         })
     }
     get_command_history();
-    setInterval(get_command_history, 5000);
+    timer2 = setInterval(get_command_history, 5000);
 
     $("#light_btn").click(function () {
         var paramsStr = window.location.search
@@ -137,12 +142,12 @@ $(function () {
                 // }
                 layer.msg("ok");
             }
-            else if (msg.msg == "offline") {
-                layer.msg("设备不在线");
-            }
         }).fail(function (e) {
             console.log(e);
-        })
+	    if(e.responseJSON.msg=="offline"){
+	        layer.msg("设备不在线");
+	    }
+	})
     })
 
 

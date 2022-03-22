@@ -54,20 +54,20 @@ $(function () {
                     for (var i = 0; i < msg.msg.length; i++) {
                         if (msg.msg[i].work_type == "1") {
                             // console.log(html)
-                            html = html + '<li class="data_li"><div>' +
+                            html = html + '<li class="data_li"><a href="/machine/data.html?type='+msg.msg[i].work_type+'&id='+msg.msg[i].id+'"><div>' +
                                 '<img src="/img/' + WORK_TYPE[msg.msg[i].work_type] + '.jpg" alt="图片">' +
                                 '<span class="label">' + xss_defender(msg.msg[i].name) + '</span>:&nbsp;&nbsp;' +
                                 '<span class="data">' + (msg.msg[i].last_data.LED_state == 0 ? "关闭" : "打开") + '</span>&nbsp;&nbsp;' +
-                                '<span class="time">' + msg.msg[i].last_data.time + '</span></div></li>'
+                                '<span class="time">' + msg.msg[i].last_data.time + '</span></div></a></li>'
                         }
                         else if (msg.msg[i].work_type == "2") {
                             // console.log(html)
-                            html = html + '<li class="data_li"><div>' +
+                            html = html + '<li class="data_li"><a href="/machine/data.html?type='+msg.msg[i].work_type+'&id='+msg.msg[i].id+'"><div>' +
                                 '<img src="/img/' + WORK_TYPE[msg.msg[i].work_type] + '.jpg" alt="图片">' +
                                 '<span class="label">' + xss_defender(msg.msg[i].name) + '</span>:&nbsp;&nbsp;' +
                                 '<span class="data">' + msg.msg[i].last_data.temp + '</span>℃&nbsp;&nbsp;' +
                                 '<span class="data">' + msg.msg[i].last_data.humidity + '</span>%&nbsp;&nbsp;' +
-                                '<span class="time">' + msg.msg[i].last_data.time + '</span></div></li>'
+                                '<span class="time">' + msg.msg[i].last_data.time + '</span></div></a></li>'
                         }
                     }
                 }

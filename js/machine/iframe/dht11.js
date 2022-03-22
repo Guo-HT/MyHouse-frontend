@@ -57,7 +57,7 @@ $(function () {
                 },
                 detail: {
                     formatter: '{value}℃',
-                    textStyle: { //当前温度的文字大小
+                    textStyhle: { //当前温度的文字大小
                         fontSize: 24
                     },
                 },
@@ -221,10 +221,14 @@ $(function () {
             }
         }).fail(function (e) {
             console.log(e);
+	    if(e.status==500){
+	        layer.msg("错误，请检查设备类型与id是否正确");
+	        clearInterval(timer1);
+	    }
         })
     }
     setData();
-    setInterval(setData, 10000);
+    timer1 = setInterval(setData, 10000);
 
 
 })
