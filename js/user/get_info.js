@@ -32,6 +32,13 @@ $(function () {
         }
     }).fail(function (e) {
         console.log(e);
+        if(e.responseJSON.msg=="ban"){
+            layer.msg("拒绝，内含敏感词汇");
+        }else if(e.status==403 &&e.responseJSON.msg=="jump to login"){
+            layer.msg("请登录");
+        }else{
+            layer.msg(e.status);
+        }
     })
 
     // 获取历史记录 start
@@ -85,7 +92,13 @@ $(function () {
                 $("#history_content").html(html);
             }
         }).fail(function (e) {
-
+            if(e.responseJSON.msg=="ban"){
+                layer.msg("拒绝，内含敏感词汇");
+            }else if(e.status==403 &&e.responseJSON.msg=="jump to login"){
+                layer.msg("请登录");
+            }else{
+                layer.msg(e.status);
+            }
         });
     }
 
@@ -145,7 +158,13 @@ $(function () {
 
             }
         }).fail(function (e) {
-
+            if(e.responseJSON.msg=="ban"){
+                layer.msg("拒绝，内含敏感词汇");
+            }else if(e.status==403 &&e.responseJSON.msg=="jump to login"){
+                layer.msg("请登录");
+            }else{
+                layer.msg(e.status);
+            }
         });
     }
     get_collect(1);
@@ -202,7 +221,13 @@ $(function () {
                 $("#good_content").html(html);
             }
         }).fail(function (e) {
-
+            if(e.responseJSON.msg=="ban"){
+                layer.msg("拒绝，内含敏感词汇");
+            }else if(e.status==403 &&e.responseJSON.msg=="jump to login"){
+                layer.msg("请登录");
+            }else{
+                layer.msg(e.status);
+            }
         });
     }
     get_good(1);
@@ -263,7 +288,13 @@ $(function () {
                 $("#my_upload_essay").html(html);
             }
         }).fail(function (e) {
-
+            if(e.responseJSON.msg=="ban"){
+                layer.msg("拒绝，内含敏感词汇");
+            }else if(e.status==403 &&e.responseJSON.msg=="jump to login"){
+                layer.msg("请登录");
+            }else{
+                layer.msg(e.status);
+            }
         });
     }
     get_upload(1);
@@ -304,6 +335,13 @@ $(function () {
                 }
             }).fail(function(e){
                 console.log(e);
+                if(e.responseJSON.msg=="ban"){
+                    layer.msg("拒绝，内含敏感词汇");
+                }else if(e.status==403 &&e.responseJSON.msg=="jump to login"){
+                    layer.msg("请登录");
+                }else{
+                    layer.msg(e.status);
+                }
             })
         })
     })

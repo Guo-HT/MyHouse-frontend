@@ -61,6 +61,9 @@ $(function () {
         $("#list_body_ul").html(html);
     }).fail(function (e) {
         console.log(e);
+        if(e.status==500){
+            layer.msg("页数错误")
+        }
     })
 })
 

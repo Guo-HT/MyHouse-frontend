@@ -29,14 +29,13 @@ $(function () {
                 "X-CSRFToken": get_csrf_token(),
             },
         }).done(function (msg) {
-            if (msg.state == "fail" && msg.msg == "jump to login") {
-                layer.msg("请登录");
-                return;
-            }
             $("#good_num").html(msg.msg.good_num);
             $("#good_num_2").html(msg.msg.good_num);
         }).fail(function (e) {
             console.log(e);
+            if(e.responseJSON.msg=="jump to login"){
+                layer.msg("请登录");
+            }
         })
     })
 
@@ -67,10 +66,6 @@ $(function () {
             },
         }).done(function (msg) {
             console.log(msg);
-            if (msg.state == "fail" && msg.msg == "jump to login") {
-                layer.msg("请登录");
-                return;
-            }
             if (msg.msg.collect_state == "true") {
                 $("#collect_tip").text("已收藏");
             } else {
@@ -78,6 +73,9 @@ $(function () {
             }
         }).fail(function (e) {
             console.log(e);
+            if(e.responseJSON.msg=="jump to login"){
+                layer.msg("请登录");
+            }
         })
     })
 

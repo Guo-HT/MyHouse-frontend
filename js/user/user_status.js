@@ -72,6 +72,11 @@ $(function () {
                 }
             }).fail(function (e) {
                 console.log(e);
+                if(e.responseJSON.msg=="ban"){
+                    layer.msg("拒绝，内含敏感词汇");
+                }else{
+                    layer.msg(e.status);
+                }
             })
         })
     })
@@ -103,6 +108,13 @@ $(function () {
                 }
             }).fail(function (e) {
                 console.log(e)
+                if(e.responseJSON.msg=="ban"){
+                    layer.msg("拒绝，内含敏感词汇");
+                }else if(e.status==403 &&e.responseJSON.msg=="jump to login"){
+                    layer.msg("请登录");
+                }else{
+                    layer.msg(e.status);
+                }
             })
         });
     })

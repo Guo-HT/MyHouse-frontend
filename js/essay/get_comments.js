@@ -129,6 +129,12 @@ $(function () {
                 layer.msg("休息一会儿吧~");
                 return
             }
+            else if(e.responseJSON.msg=="jump to login"){
+                layer.msg("请登录");
+                return
+            }else if(e.status==403 && e.responseJSON.msg=="ban"){
+                layer.msg("拒绝，内含敏感词汇");
+            }
         })
     });
     // 发表评论 end
@@ -201,6 +207,11 @@ $(function () {
             if(e.responseJSON.msg=="wait"){
                 layer.msg("休息一会儿吧~");
                 return
+            }else if(e.responseJSON.msg=="jump to login"){
+                layer.msg("请登录");
+                return
+            }else if(e.status==403 && e.responseJSON.msg=="ban"){
+                layer.msg("拒绝，内含敏感词汇");
             }
         })
     })
@@ -233,6 +244,10 @@ $(function () {
             }
         }).fail(function (e) {
             console.log(e);
+            if(e.responseJSON.msg=="jump to login"){
+                layer.msg("请登录");
+                return
+            }
         })
     })
     // 评论、回复点赞 end

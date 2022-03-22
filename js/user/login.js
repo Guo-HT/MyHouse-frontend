@@ -88,11 +88,19 @@ $(function () {
             if(msg.state=="ok"){
                 location.href = "/index.html";
             }
-            else{
-                layer.msg("用户名或密码错误！")
-            }
         }).fail(function(e){
-            layer.msg("登录失败！请稍后重试");
+            if(e.status==403){
+                if(e.responseJSON.msg=="format error"){
+                    layer.msg("信息格式错误");
+                }else if(e.responseJSON.msg=="user not exist" || e.responseJSON.msg=="password error"){
+                    layer.msg("用户名或密码错误");
+                }else if(e.responseJSON.msg=="ban"){
+                    layer.msg("拒绝，内含敏感词汇");
+                }
+            }
+            else{
+                layer.msg("登录失败！请稍后重试");
+            }
         })
     })
 })

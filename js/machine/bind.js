@@ -75,15 +75,17 @@ $(function () {
                         clearInterval(this.timer);
                     }
                 });
-            }else if(msg.msg=="machine not exist"){
+            } 
+        }).fail(function(e){
+            if(e.responseJSON.msg=="machine not exist"){
                 layer.msg("设备不存在");
-            }else if(msg.msg=="type not ok"){
+            }else if(e.responseJSON.msg=="type not ok"){
                 layer.msg("设备类型有误！");
-            }else if(msg.msg=="belong to else"){
+            }else if(e.responseJSON.msg=="belong to else"){
                 layer.msg("其他用户已绑定该设备");
-            }else if(msg.msg=="already bind"){
+            }else if(e.responseJSON.msg=="already bind"){
                 layer.msg("您已绑定该设备");
-            }else if(msg.msg=="jump to login"){
+            }else if(e.responseJSON.msg=="jump to login"){
                 layer.msg("请登录！");
             }
         })

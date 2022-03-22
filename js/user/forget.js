@@ -61,18 +61,22 @@ $(function(){
         }).done(function(msg){
             if(msg.state=="ok"){
                 layer.msg("邮件已发送，有效期5分钟");
-            }else if(msg.state=="fail"){
-                if(msg.msg=="email not exist"){
-                    layer.msg("邮箱未注册");
-                }else if(msg.msg=="send failed"){
-                    layer.msg("发送失败，请稍后重试");
-                }else{
-                    layer.msg("数据发生错误，请稍后重试");
-                }
             }
         }).fail(function(e){
             console.log(e);
-            layer.msg("出现错误！")
+            if(e.status==403){
+                if(e.responseJSON.msg=="wait"){
+                    layer.msg("频率限制，请稍后再试")
+                }else if(e.responseJSON.msg=="user not exist"){
+                    layer.msg("用户不存在");
+                }else if(e.responseJSON.msg=="ban"){
+                    layer.msg("拒绝，内含敏感词汇");
+                }
+            }else if(e.status==500){
+                layer.msg("发生错误，请稍后再试");
+            }
+
+
         })
     })
 
@@ -113,16 +117,22 @@ $(function(){
             if(msg.state=="ok"){
                 layer.msg("修改成功");
                 location.href="/user/login.html";
-            }else if(msg.msg=="user not exist"){
-                layer.msg("用户未注册");
-            }else if(msg.msg=="not verified"){
-                layer.msg("验证错误，请重试");
-            }else if(msg.msg=="databases save failed"){
-                layer.msg("数据发生错误，请稍后重试");
             }
         }).fail(function(e){
             console.log(e)
-            layer.msg("服务器出现错误，请稍后再试，或联系管理员")
+            if(e.status==403){
+                if(e.responseJSON.msg=="format error"){
+                    layer.msg("信息格式错误")
+                }else if(e.responseJSON.msg=="user not exist"){
+                    layer.msg("用户不存在")
+                }else if(e.responseJSON.msg=="not verified"){
+                    layer.msg("验证错误")
+                }else if(e.responseJSON.msg=="ban"){
+                    layer.msg("拒绝，内含敏感词汇");
+                }
+            }else if(e.status==500){
+                layer.msg("发生错误");
+            }
         })
     })
 })

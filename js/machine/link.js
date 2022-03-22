@@ -146,10 +146,12 @@ $(function () {
         }).done(function (msg) {
             console.log(msg);
             if (msg.state = "ok") {
+                show_already_link(1);
                 layer.msg("提交成功");
             }
         }).fail(function (e) {
             console.log(e);
+            layer.msg("失败")
         })
     })
 
